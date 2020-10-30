@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Button, Menu, Segment } from 'semantic-ui-react'
 import { leftSideMenu, rightSideMenu } from '../../Constants'
 import { StyledMenu } from './index.style'
-import TopNews from '../../pages/TopNews/index'
+import Articles from '../../pages/Articles/index'
 
 const MainMenu = () => {
 
@@ -33,9 +33,7 @@ const MainMenu = () => {
         })}
       </Menu.Menu>
     </StyledMenu>
-    <Segment attached='bottom'>
-      {activeItem === leftSideMenu[0].name && <TopNews></TopNews>}
-    </Segment>
+    {activeItem === leftSideMenu[0].name && <Articles></Articles>}
   </Fragment>
 }
 export default MainMenu

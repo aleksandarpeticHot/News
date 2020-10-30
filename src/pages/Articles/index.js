@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import newsApi from '../../services/common/news'
 import { Card, Popup, Segment, Image, Icon } from 'semantic-ui-react'
-import { StyledNewsTitle } from './index.style'
+import { StyledNewsTitle, StyledCardContent } from './index.style'
 
 const TopNews = () => {
 
@@ -31,7 +31,7 @@ const TopNews = () => {
   }
 
   const renderNews = () => {
-    return <Card.Group>
+    return <Card.Group >
       {articles.map((article, index) => {
         return <Card key={index}>
           <Card.Content>
@@ -49,12 +49,12 @@ const TopNews = () => {
             />
             }
           </Card.Content>
-          <Card.Content style={{ color: 'black' }} extra>
-            <a style={{ color: 'rgba(0,0,0,.4)' }} target="_blank" rel="noopener noreferrer" href={article.url} style={{ float: 'right', cursor: 'pointer' }}>
+          <Card.Content extra>
+            <StyledCardContent target="_blank" rel="noopener noreferrer" href={article.url} style={{ float: 'right', cursor: 'pointer' }}>
               {'More'}
               <Icon name='angle right' />
-            </a>
-          </Card.Content>
+            </StyledCardContent>
+          </Card.Content >
         </Card>
       })}
     </Card.Group>
