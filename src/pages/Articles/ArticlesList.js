@@ -2,18 +2,24 @@ import React, { useEffect, useState } from 'react'
 import newsApi from '../../services/common/news'
 import { Card, Popup, Segment, Image, Icon } from 'semantic-ui-react'
 import { StyledNewsTitle, StyledCardContent } from './index.style'
+import Article from './Article'
+import { RouteTypes } from '../../Constants'
 
-const TopNews = () => {
+const ArticlesList = (props) => {
 
   const [newsData, setNewsData] = useState({
     isBusy: false,
-    articles: []
+    articles: props.articles || []
   })
+
+  const [article, setArticle] = useState(null)
 
   const { isBusy, articles } = newsData
 
   useEffect(() => {
-    fetchNews()
+    if (!props.articles) {
+      fetchNews()
+    }
   }, [])
 
   const fetchNews = async () => {
@@ -26,13 +32,15 @@ const TopNews = () => {
         isBusy: false
       }))
     } catch (error) {
-      console.log(error)
+      setNewsData(prevData => ({ ...prevData, isBusy: false }))
     }
   }
 
   const renderNews = () => {
-    return <Card.Group >
+
+    return <Card.Group centered>
       {articles.map((article, index) => {
+        const location = RouteTypes.TOP_NEWS_ARTICLE.replace(':id', index)
         return <Card key={index}>
           <Card.Content>
             <div>
@@ -50,7 +58,7 @@ const TopNews = () => {
             }
           </Card.Content>
           <Card.Content extra>
-            <StyledCardContent target="_blank" rel="noopener noreferrer" href={article.url} style={{ float: 'right', cursor: 'pointer' }}>
+            <StyledCardContent onClick={() => props.history.push(location)} style={{ float: 'right', cursor: 'pointer' }}>
               {'More'}
               <Icon name='angle right' />
             </StyledCardContent>
@@ -60,8 +68,9 @@ const TopNews = () => {
     </Card.Group>
   }
 
+
   return <Segment loading={isBusy}>
-    {renderNews()}
+    {article ? <Article article={article} /> : renderNews()}
   </Segment>
 }
-export default TopNews
+export default ArticlesList

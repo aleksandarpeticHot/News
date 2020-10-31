@@ -1,18 +1,21 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Menu, Segment } from 'semantic-ui-react'
 import { leftSideMenu, rightSideMenu } from '../../Constants'
 import { StyledMenu } from './index.style'
-import Articles from '../../pages/Articles/index'
+import { RouteTypes } from '../../Constants'
 
-const MainMenu = () => {
+const MainMenu = (props) => {
 
-  const [activeItem, setActiveItem] = useState(leftSideMenu[0].name)
+  const [activeItem, setActiveItem] = useState()
 
   const handleItemClick = (e, { name }) => setActiveItem(name)
 
+  const handleChangeLanguage = (language) => {
 
-  return <Fragment>
+  }
+
+  return <>
     <StyledMenu fluid inverted={true} pointing>
       {leftSideMenu.map(item => {
         return <Menu.Item
@@ -20,7 +23,7 @@ const MainMenu = () => {
           to={item.url}
           key={item.name}
           name={item.name}
-          active={activeItem === item.name}
+          active={activeItem === item.name || window.location.pathname === item.url}
           onClick={handleItemClick}
         />
       })
@@ -28,12 +31,11 @@ const MainMenu = () => {
       <Menu.Menu position='right'>
         {rightSideMenu.map(item => {
           return <Menu.Item key={item}>
-            <Button icon>{item}</Button>
+            <Button onClick={() => handleChangeLanguage(item)} icon>{item}</Button>
           </Menu.Item>
         })}
       </Menu.Menu>
     </StyledMenu>
-    {activeItem === leftSideMenu[0].name && <Articles></Articles>}
-  </Fragment>
+  </>
 }
 export default MainMenu

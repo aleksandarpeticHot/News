@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Card } from 'semantic-ui-react'
 
 export const StyledNewsTitle = styled.div`
 white-space: nowrap;
