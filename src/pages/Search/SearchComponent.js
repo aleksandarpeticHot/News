@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Header, Input, Segment } from 'semantic-ui-react'
 import { getSearchResults } from '../../services/common/search'
 import ArticlesList from '../Articles/ArticlesList'
 import { debounce } from 'lodash'
+import notify from '../../services/common/notify'
 
 const SearchComponent = (props) => {
 
@@ -23,6 +24,7 @@ const SearchComponent = (props) => {
         isBusy: false
       })
     } catch (error) {
+      notify(error.response.data.message, 'error')
       setSearchData({
         ...searchData,
         results: [],

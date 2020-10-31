@@ -4,6 +4,7 @@ import { categories } from '../../Constants'
 import { StyledAccordionTittle } from './style'
 import categorieApi from '../../services/common/categories'
 import ArticlesList from '../Articles/ArticlesList'
+import notify from '../../services/common/notify'
 
 export const style = {
   background: '#F08080'
@@ -24,7 +25,7 @@ const CategoriesList = () => {
 
   useEffect(() => {
     fetchArticlesInCategorie()
-  }, [])
+  })
 
   const fetchArticlesInCategorie = async () => {
     setArticlesData(prevData => ({ ...prevData, isBusy: true }))
@@ -50,6 +51,7 @@ const CategoriesList = () => {
         isBusy: false
       })
     } catch (error) {
+      notify(error.response.data.message, 'error')
       setArticlesData(prevData => ({ ...prevData, isBusy: false }))
     }
   }
@@ -60,6 +62,10 @@ const CategoriesList = () => {
     setActiveIndex(newIndex)
   }
 
+  const showTitleArticles = (category, index) => {
+    return articles[category.id] && articles[category.id].length > 0 && activeIndex !== index
+  }
+
   const renderCategories = () => {
     return <Accordion>
       {categories.map((category, index) => {
@@ -67,7 +73,6 @@ const CategoriesList = () => {
           <StyledAccordionTittle
             key={index}
             style={activeIndex === index ? style : null}
-            key={index}
             active={activeIndex === index}
             index={index}
             onClick={handleClick}
@@ -77,7 +82,7 @@ const CategoriesList = () => {
                 <p style={{ flexGrow: 1, marginBottom: 0 }}>{category.title}</p>
                 <Icon name='dropdown' size="big" />
               </div>
-              {articles[category.id] && articles[category.id].length > 0 && activeIndex !== index && <ArticlesList itemsPerRow={pageSize} articles={articles[category.id]} />}
+              {showTitleArticles(category, index) && <ArticlesList itemsPerRow={pageSize} articles={articles[category.id]} />}
             </div>
           </StyledAccordionTittle>
           <Accordion.Content active={activeIndex === index}>

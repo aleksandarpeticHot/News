@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import newsApi from '../../services/common/news'
 import { Card, Popup, Segment, Image, Icon } from 'semantic-ui-react'
 import { StyledNewsTitle, StyledCardContent } from './index.style'
-import Article from './Article'
 import { RouteTypes } from '../../Constants'
+import notify from '../../services/common/notify'
 
 const ArticlesList = (props) => {
 
@@ -11,8 +11,6 @@ const ArticlesList = (props) => {
     isBusy: false,
     articles: props.articles || []
   })
-
-  const [article, setArticle] = useState(null)
 
   const { isBusy, articles } = newsData
 
@@ -32,15 +30,16 @@ const ArticlesList = (props) => {
         isBusy: false
       }))
     } catch (error) {
+      notify(error.response.data.message, 'error')
       setNewsData(prevData => ({ ...prevData, isBusy: false }))
     }
   }
 
-  const renderNews = () => {
+  const renderArticles = () => {
 
     return <Card.Group itemsPerRow={props.itemsPerRow || null} centered>
       {articles.map((article, index) => {
-        const location = RouteTypes.TOP_NEWS_ARTICLE.replace(':id', index)
+        const location = RouteTypes.ARTICLE.replace(':id', index)
         return <Card key={index}>
           <Card.Content>
             <div>
@@ -70,7 +69,7 @@ const ArticlesList = (props) => {
 
 
   return <Segment loading={isBusy}>
-    {article ? <Article article={article} /> : renderNews()}
+    {renderArticles()}
   </Segment>
 }
 export default ArticlesList

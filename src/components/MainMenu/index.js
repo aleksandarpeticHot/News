@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Menu, Segment } from 'semantic-ui-react'
+import { Button, Menu } from 'semantic-ui-react'
 import { leftSideMenu, rightSideMenu } from '../../Constants'
 import { StyledMenu } from './index.style'
-import { RouteTypes } from '../../Constants'
 
-const MainMenu = (props) => {
+const MainMenu = () => {
 
   const [activeItem, setActiveItem] = useState()
 

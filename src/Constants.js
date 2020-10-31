@@ -3,7 +3,7 @@ export const RouteTypes = Object.assign({
   TOP_NEWS: '/articles-list',
   CATEGORIES: '/categories',
   SEARCH: '/search',
-  TOP_NEWS_ARTICLE: '/article/:id'
+  ARTICLE: '/article/:articleGroup/:id'
 })
 
 export const apiKey = 'e810bd78d59d4aaa98d7830352ee1742'
