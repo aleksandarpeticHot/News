@@ -9,10 +9,11 @@ const SearchComponent = (props) => {
 
   const [searchData, setSearchData] = useState({
     isBusy: false,
-    results: []
+    results: [],
+    value: ''
   })
 
-  const { isBusy, results } = searchData
+  const { isBusy, results, value } = searchData
 
   const handleSearch = debounce(async (text) => {
     try {
@@ -20,6 +21,7 @@ const SearchComponent = (props) => {
       const results = await getSearchResults(text)
       setSearchData({
         ...searchData,
+        value: text,
         results: results.data.articles,
         isBusy: false
       })
@@ -27,6 +29,7 @@ const SearchComponent = (props) => {
       notify(error.response.data.message, 'error')
       setSearchData({
         ...searchData,
+        value: text,
         results: [],
         isBusy: false
       })
@@ -42,7 +45,7 @@ const SearchComponent = (props) => {
       iconPosition='left'
       style={{ marginTop: '50px', minWidth: '50vw', marginLeft: '20%' }}
       placeholder={'Search term...'} />
-    {results.length > 0 ? <ArticlesList articles={results} /> : null}
+    {results.length > 0 ? <ArticlesList urlData={{ articleGroup: 'q', articleId: value }} {...props} articles={results} /> : null}
   </Segment>
 }
 export default SearchComponent

@@ -5,6 +5,13 @@ import { StyledAccordionTittle } from './style'
 import categorieApi from '../../services/common/categories'
 import ArticlesList from '../Articles/ArticlesList'
 import notify from '../../services/common/notify'
+import entertainment from '../../mockups/entertainment.json'
+import general from '../../mockups/general.json'
+import health from '../../mockups/health.json'
+import science from '../../mockups/science.json'
+import sport from '../../mockups/sport.json'
+import technology from '../../mockups/technology.json'
+
 
 export const style = {
   background: '#F08080'
@@ -12,7 +19,7 @@ export const style = {
 
 export const pageSize = 5
 
-const CategoriesList = () => {
+const CategoriesList = (props) => {
 
   const [articlesData, setArticlesData] = useState({
     isBusy: false,
@@ -25,27 +32,27 @@ const CategoriesList = () => {
 
   useEffect(() => {
     fetchArticlesInCategorie()
-  })
+  }, [])
 
   const fetchArticlesInCategorie = async () => {
     setArticlesData(prevData => ({ ...prevData, isBusy: true }))
     try {
-      const responseEntertainment = await categorieApi.getEntertainment(pageSize)
-      const responseGeneral = await categorieApi.getGeneral(pageSize)
-      const responseHealth = await categorieApi.getHealth(pageSize)
-      const responseScience = await categorieApi.getScience(pageSize)
-      const responseSport = await categorieApi.getSport(pageSize)
-      const responseTechnology = await categorieApi.getTechnology(pageSize)
+      /*  const responseEntertainment = await categorieApi.getEntertainment(pageSize)
+       const responseGeneral = await categorieApi.getGeneral(pageSize)
+       const responseHealth = await categorieApi.getHealth(pageSize)
+       const responseScience = await categorieApi.getScience(pageSize)
+       const responseSport = await categorieApi.getSport(pageSize)
+       const responseTechnology = await categorieApi.getTechnology(pageSize) */
 
       setArticlesData({
         ...articlesData,
         articles: {
-          entertainment: responseEntertainment.data.articles,
-          general: responseGeneral.data.articles,
-          health: responseHealth.data.articles,
-          science: responseScience.data.articles,
-          sport: responseSport.data.articles,
-          technology: responseTechnology.data.articles
+          entertainment: entertainment.articles,
+          general: general.articles,
+          health: health.articles,
+          science: science.articles,
+          sport: sport.articles,
+          technology: technology.articles
 
         },
         isBusy: false
@@ -69,6 +76,10 @@ const CategoriesList = () => {
   const renderCategories = () => {
     return <Accordion>
       {categories.map((category, index) => {
+        const urlData = {
+          articleGroup: 'category',
+          articleId: category.id
+        }
         return < >
           <StyledAccordionTittle
             key={index}
@@ -89,7 +100,7 @@ const CategoriesList = () => {
             <Dimmer inverted active={isBusy}>
               <Loader />
             </Dimmer>
-            {articles[category.id] && articles[category.id].length > 0 && <ArticlesList articles={articles[category.id]} />}
+            {articles[category.id] && articles[category.id].length > 0 && <ArticlesList {...props} urlData={urlData} articles={articles[category.id]} />}
           </Accordion.Content>
         </>
       })}
@@ -98,7 +109,7 @@ const CategoriesList = () => {
 
   return <>
     <h3 style={{ margin: '10px', marginTop: '30px' }}>{'Top 5 news categories from GB'}</h3>
-    <Segment style={{ margin: '10px' }}>
+    <Segment loading={isBusy} style={{ margin: '10px' }}>
       {renderCategories()}
     </Segment>
   </>

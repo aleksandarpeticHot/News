@@ -35,11 +35,17 @@ const ArticlesList = (props) => {
     }
   }
 
+  const composeUrl = (urlData, index) => {
+    const { articleGroup, articleId } = urlData
+    return RouteTypes.ARTICLE.replace(':articleGroup', articleGroup).replace(':articleId', articleId).replace(':index', index)
+  }
+
   const renderArticles = () => {
 
     return <Card.Group itemsPerRow={props.itemsPerRow || null} centered>
       {articles.map((article, index) => {
-        const location = RouteTypes.ARTICLE.replace(':id', index)
+        const urlData = props.urlData || { articleGroup: 'country', articleId: 'gb', index: index }
+        const location = composeUrl(urlData, index)
         return <Card key={index}>
           <Card.Content>
             <div>
@@ -57,7 +63,7 @@ const ArticlesList = (props) => {
             }
           </Card.Content>
           <Card.Content extra>
-            <StyledCardContent onClick={() => props.history.push(location)} style={{ float: 'right', cursor: 'pointer' }}>
+            <StyledCardContent onClick={() => { console.log(props, location); props.history.push(location) }} style={{ float: 'right', cursor: 'pointer' }}>
               {'More'}
               <Icon name='angle right' />
             </StyledCardContent>
@@ -66,7 +72,6 @@ const ArticlesList = (props) => {
       })}
     </Card.Group>
   }
-
 
   return <Segment loading={isBusy}>
     {renderArticles()}

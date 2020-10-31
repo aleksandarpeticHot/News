@@ -3,10 +3,10 @@ export const RouteTypes = Object.assign({
   TOP_NEWS: '/articles-list',
   CATEGORIES: '/categories',
   SEARCH: '/search',
-  ARTICLE: '/article/:articleGroup/:id'
+  ARTICLE: '/article/:articleGroup/:articleId/:index'
 })
 
-export const apiKey = 'e810bd78d59d4aaa98d7830352ee1742'
+export const apiKey = '66ab60b83a2a49a3958178b548b3f904'
 
 //should be defined is some config file coming from the api
 export const leftSideMenu = [
