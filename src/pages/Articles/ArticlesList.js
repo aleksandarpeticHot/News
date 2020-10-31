@@ -38,7 +38,7 @@ const ArticlesList = (props) => {
 
   const renderNews = () => {
 
-    return <Card.Group centered>
+    return <Card.Group itemsPerRow={props.itemsPerRow || null} centered>
       {articles.map((article, index) => {
         const location = RouteTypes.TOP_NEWS_ARTICLE.replace(':id', index)
         return <Card key={index}>

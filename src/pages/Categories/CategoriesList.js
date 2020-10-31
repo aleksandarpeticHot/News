@@ -15,7 +15,7 @@ const CategoriesList = () => {
 
   const [articlesData, setArticlesData] = useState({
     isBusy: false,
-    articles: []
+    articles: {}
   })
 
   const [activeIndex, setActiveIndex] = useState(-1)
@@ -23,18 +23,30 @@ const CategoriesList = () => {
   const { articles, isBusy } = articlesData
 
   useEffect(() => {
-    if (activeIndex >= 0) {
-      fetchArticlesInCategorie(categories[activeIndex].id)
-    }
-  }, [activeIndex])
+    fetchArticlesInCategorie()
+  }, [])
 
-  const fetchArticlesInCategorie = async (id) => {
+  const fetchArticlesInCategorie = async () => {
     setArticlesData(prevData => ({ ...prevData, isBusy: true }))
     try {
-      const response = await categorieApi.getCategorie(id, pageSize)
+      const responseEntertainment = await categorieApi.getEntertainment(pageSize)
+      const responseGeneral = await categorieApi.getGeneral(pageSize)
+      const responseHealth = await categorieApi.getHealth(pageSize)
+      const responseScience = await categorieApi.getScience(pageSize)
+      const responseSport = await categorieApi.getSport(pageSize)
+      const responseTechnology = await categorieApi.getTechnology(pageSize)
+
       setArticlesData({
         ...articlesData,
-        articles: response.data.articles,
+        articles: {
+          entertainment: responseEntertainment.data.articles,
+          general: responseGeneral.data.articles,
+          health: responseHealth.data.articles,
+          science: responseScience.data.articles,
+          sport: responseSport.data.articles,
+          technology: responseTechnology.data.articles
+
+        },
         isBusy: false
       })
     } catch (error) {
@@ -60,16 +72,19 @@ const CategoriesList = () => {
             index={index}
             onClick={handleClick}
           >
-            <div style={{ display: 'flex', padding: '10px', alignItems: 'baseline', color: activeIndex === index ? 'white' : 'black' }}>
-              <p style={{ flexGrow: 1, marginBottom: 0 }}>{category.title}</p>
-              <Icon name='dropdown' size="big" />
+            <div>
+              <div style={{ display: 'flex', padding: '10px', alignItems: 'baseline', color: activeIndex === index ? 'white' : 'black' }}>
+                <p style={{ flexGrow: 1, marginBottom: 0 }}>{category.title}</p>
+                <Icon name='dropdown' size="big" />
+              </div>
+              {articles[category.id] && articles[category.id].length > 0 && activeIndex !== index && <ArticlesList itemsPerRow={pageSize} articles={articles[category.id]} />}
             </div>
           </StyledAccordionTittle>
           <Accordion.Content active={activeIndex === index}>
             <Dimmer inverted active={isBusy}>
               <Loader />
             </Dimmer>
-            {articles.length > 0 && <ArticlesList articles={articles} />}
+            {articles[category.id] && articles[category.id].length > 0 && <ArticlesList articles={articles[category.id]} />}
           </Accordion.Content>
         </>
       })}

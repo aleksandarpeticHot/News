@@ -4,6 +4,7 @@ import ArticlesList from '../src/pages/Articles/ArticlesList'
 import Article from '../src/pages/Articles/Article'
 import MainMenu from '../src/components/MainMenu'
 import CategoriesList from '../src/pages/Categories/CategoriesList'
+import SearchComponent from '../src/pages/Search/SearchComponent'
 import { RouteTypes } from './Constants'
 
 const Router = (props) => {
@@ -29,6 +30,7 @@ const Router = (props) => {
       <PrivateRoute exact path={RouteTypes.TOP_NEWS} component={ArticlesList} />
       <PrivateRoute exact path={RouteTypes.TOP_NEWS_ARTICLE} component={Article} />
       <PrivateRoute exact path={RouteTypes.CATEGORIES} component={CategoriesList} />
+      <PrivateRoute exact path={RouteTypes.SEARCH} component={SearchComponent} />
     </Switch>
   </BrowserRouter>
 }
