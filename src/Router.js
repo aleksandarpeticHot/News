@@ -10,7 +10,6 @@ import Notifications from 'react-notify-toast'
 
 const Router = (props) => {
 
-  console.log(props, window.location, RouteTypes.TOP_NEWS_ARTICLE)
   const PrivateRoute = ({ component: Component, ...rest }) => {
     return (
       <Route

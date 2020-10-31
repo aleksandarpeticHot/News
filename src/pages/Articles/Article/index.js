@@ -48,6 +48,11 @@ const Article = (props) => {
   return <Segment loading={isBusy}>
     <Header style={{ margin: '10px 0' }}>{article.title}</Header>
     {article.urlToImage && <Image
+      style={{
+        maxWidth: '70vw',
+        maxHeight: '50vh',
+        margin: '20px auto'
+      }}
       src={article.urlToImage}
     />
     }

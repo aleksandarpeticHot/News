@@ -5,8 +5,4 @@ export const StyledAccordionTittle = styled(Accordion.Title)`
 border: 1px solid rgba(34,36,38,.15); 
 border-radius: 10px; 
 margin-bottom: 10px;
-&:hover{
-  background: #F08080 !important;
-  color: white !important;
-}
 `
