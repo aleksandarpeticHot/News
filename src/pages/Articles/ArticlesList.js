@@ -1,6 +1,6 @@
-import React, { useEffect, useState, createRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import newsApi from '../../services/common/news'
-import { Card, Popup, Segment, Image, Icon, Ref } from 'semantic-ui-react'
+import { Card, Popup, Segment, Image, Icon, Ref, Label } from 'semantic-ui-react'
 import { StyledNewsTitle, StyledCardContent, StyledArrow } from './index.style'
 import { RouteTypes } from '../../Constants'
 import notify from '../../services/common/notify'
@@ -11,8 +11,6 @@ const ArticlesList = (props) => {
     isBusy: false,
     articles: props.articles || []
   })
-
-  let createdRef = null
 
   const { isBusy, articles } = newsData
 
@@ -25,7 +23,7 @@ const ArticlesList = (props) => {
   const fetchNews = async () => {
     setNewsData(prevData => ({ ...prevData, isBusy: true }))
     try {
-      const newsResponse = await newsApi.getTopNews('gb')
+      const newsResponse = await newsApi.getTopNews(props.language.id)
       setNewsData(prevData => ({
         ...prevData,
         articles: newsResponse.data.articles,
@@ -50,9 +48,9 @@ const ArticlesList = (props) => {
   }
 
   const renderArticles = () => {
-
+    const articlePerRow = props.urlData ? null : Math.round(Math.sqrt(articles.length)) || null
     return <Ref>
-      <Card.Group style={props.styleCardsGroup}>
+      <Card.Group stackable itemsPerRow={articlePerRow} style={props.styleCardsGroup || { margin: 0 }}>
         {props.styleCardsGroup && getArrows()}
         {articles.map((article, index) => {
           const urlData = props.urlData || { articleGroup: 'country', articleId: 'gb', index: index }
@@ -86,6 +84,7 @@ const ArticlesList = (props) => {
   }
 
   return <Segment style={props.style} loading={isBusy}>
+    <Label size="huge" >{`Top 5 news from ${props.language.country}`}</Label>
     {renderArticles()}
   </Segment>
 }

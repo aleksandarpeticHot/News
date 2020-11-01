@@ -121,7 +121,7 @@ const CategoriesList = (props) => {
   }
 
   return <>
-    <Label size="huge" style={{ margin: '1em 1em 0em 1em' }}>{'Top 5 news categories from GB'}</Label>
+    <Label size="huge" style={{ margin: '1em 1em 0em 1em' }}>{`Top 5 news categories from ${props.language.country}`}</Label>
     <Segment loading={isBusy} style={{ margin: '10px', border: 0, boxShadow: '0 0 black' }}>
       {renderCategories()}
     </Segment>

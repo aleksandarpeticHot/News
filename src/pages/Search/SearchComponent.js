@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Header, Input, Segment } from 'semantic-ui-react'
+import { Input, Label, Segment } from 'semantic-ui-react'
 import { getSearchResults } from '../../services/common/search'
 import ArticlesList from '../Articles/ArticlesList'
 import { debounce } from 'lodash'
@@ -18,7 +18,7 @@ const SearchComponent = (props) => {
   const handleSearch = debounce(async (text) => {
     try {
       setSearchData(prevData => ({ ...prevData, isBusy: true }))
-      const results = await getSearchResults(text)
+      const results = await getSearchResults(props.language, text)
       setSearchData({
         ...searchData,
         value: text,
@@ -37,7 +37,7 @@ const SearchComponent = (props) => {
   }, 300)
 
   return <Segment style={{ minHeight: '50vh', margin: '10px' }}>
-    <Header>{'Search top news from GB by term'}</Header>
+    <Label size="huge" style={{ margin: '1em 1em 0em 1em' }}>{`Search top news from ${props.language.country} by term:`}</Label>
     <Input
       loading={isBusy}
       onChange={e => handleSearch(e.currentTarget.value)}

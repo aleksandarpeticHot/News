@@ -16,8 +16,16 @@ export const leftSideMenu = [
 ]
 
 export const rightSideMenu = [
-  'GB',
-  'US'
+  {
+    name: 'GB',
+    id: 'gb',
+    country: 'Great Britain'
+  },
+  {
+    name: 'US',
+    id: 'us',
+    country: 'USA'
+  }
 ]
 
 export const categories = [

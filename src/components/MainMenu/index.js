@@ -4,14 +4,14 @@ import { Button, Menu } from 'semantic-ui-react'
 import { leftSideMenu, rightSideMenu } from '../../Constants'
 import { StyledMenu } from './index.style'
 
-const MainMenu = () => {
+const MainMenu = (props) => {
 
   const [activeItem, setActiveItem] = useState()
 
   const handleItemClick = (e, { name }) => setActiveItem(name)
 
   const handleChangeLanguage = (language) => {
-
+    props.onLanguageChange(language)
   }
 
   return <>
@@ -29,8 +29,8 @@ const MainMenu = () => {
       }
       <Menu.Menu position='right'>
         {rightSideMenu.map(item => {
-          return <Menu.Item key={item}>
-            <Button onClick={() => handleChangeLanguage(item)} icon>{item}</Button>
+          return <Menu.Item key={item.id}>
+            <Button id={item.id} active={props.language === item.id} onClick={() => handleChangeLanguage(item)} icon>{item.name}</Button>
           </Menu.Item>
         })}
       </Menu.Menu>
