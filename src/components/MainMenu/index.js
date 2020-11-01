@@ -6,6 +6,8 @@ import { StyledMenu } from './index.style'
 
 const MainMenu = (props) => {
 
+  console.log(props)
+
   const [activeItem, setActiveItem] = useState()
 
   const handleItemClick = (e, { name }) => setActiveItem(name)
@@ -30,7 +32,15 @@ const MainMenu = (props) => {
       <Menu.Menu position='right'>
         {rightSideMenu.map(item => {
           return <Menu.Item key={item.id}>
-            <Button id={item.id} active={props.language === item.id} onClick={() => handleChangeLanguage(item)} icon>{item.name}</Button>
+            <Button
+              disabled={props.disableButtons}
+              id={item.id}
+              active={props.language.id === item.id}
+              onClick={() => handleChangeLanguage(item)}
+              icon
+            >
+              {item.name}
+            </Button>
           </Menu.Item>
         })}
       </Menu.Menu>

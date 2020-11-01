@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { Header, Icon, Image, Segment } from 'semantic-ui-react'
 import { useParams } from 'react-router-dom'
 import articleApi from '../../../services/common/news'
 import notify from '../../../services/common/notify'
+import { LanguageContext } from "../../../LanguageContext"
 
-const Article = (props) => {
+const ArticlePage = (props) => {
+
+  const languageData = useContext(LanguageContext)
+
+  const { language, setDisableButtons } = languageData
 
   const [data, setData] = useState({
     isBusy: false,
@@ -15,13 +20,15 @@ const Article = (props) => {
   const { articleGroup, articleId, index } = useParams();
 
   useEffect(() => {
+    setDisableButtons(true)
     getArticle()
+    return () => setDisableButtons(false)
   }, [props])
 
   const getArticle = async () => {
     setData(prevData => ({ ...prevData, isBusy: true }))
     try {
-      const responseArticles = await articleApi.getArticle(articleGroup, articleId)
+      const responseArticles = await articleApi.getArticle(language.id, articleGroup, articleId)
       setData({
         ...data,
         isBusy: false,
@@ -63,4 +70,4 @@ const Article = (props) => {
     </a >
   </Segment>
 }
-export default Article
+export default ArticlePage

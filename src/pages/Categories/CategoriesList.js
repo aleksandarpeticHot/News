@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState, useContext } from 'react'
 import { Accordion, Segment, Icon, Label } from 'semantic-ui-react'
 import { categories } from '../../Constants'
 import { StyledAccordionTittle } from './style'
@@ -11,6 +11,7 @@ import health from '../../mockups/health.json'
 import science from '../../mockups/science.json'
 import sport from '../../mockups/sport.json'
 import technology from '../../mockups/technology.json'
+import { LanguageContext } from '../../LanguageContext'
 
 
 export const style = {
@@ -30,6 +31,10 @@ export const pageSize = 5
 
 const CategoriesList = (props) => {
 
+  const languageData = useContext(LanguageContext)
+
+  const { language } = languageData
+
   const [articlesData, setArticlesData] = useState({
     isBusy: false,
     articles: {}
@@ -46,12 +51,12 @@ const CategoriesList = (props) => {
   const fetchArticlesInCategorie = async () => {
     setArticlesData(prevData => ({ ...prevData, isBusy: true }))
     try {
-      /*  const responseEntertainment = await categorieApi.getEntertainment(pageSize)
-       const responseGeneral = await categorieApi.getGeneral(pageSize)
-       const responseHealth = await categorieApi.getHealth(pageSize)
-       const responseScience = await categorieApi.getScience(pageSize)
-       const responseSport = await categorieApi.getSport(pageSize)
-       const responseTechnology = await categorieApi.getTechnology(pageSize)
+      /*  const responseEntertainment = await categorieApi.getEntertainment(language.id, pageSize)
+       const responseGeneral = await categorieApi.getGeneral(language.id, pageSize)
+       const responseHealth = await categorieApi.getHealth(language.id, pageSize)
+       const responseScience = await categorieApi.getScience(language.id, pageSize)
+       const responseSport = await categorieApi.getSport(language.id, pageSize)
+       const responseTechnology = await categorieApi.getTechnology(language.id, pageSize)
   */
       setArticlesData({
         ...articlesData,
@@ -77,10 +82,6 @@ const CategoriesList = (props) => {
     setActiveIndex(newIndex)
   }
 
-  const showTitleArticles = (category, index) => {
-    return articles[category.id] && articles[category.id].length > 0 && activeIndex !== index
-  }
-
   const renderCategories = () => {
     return <Accordion>
       {categories.map((category, index) => {
@@ -100,16 +101,18 @@ const CategoriesList = (props) => {
                 <h3 style={{ flexGrow: 1, marginBottom: 0 }}>{category.title}</h3>
                 <Icon name='dropdown' size="big" />
               </div>
-              {showTitleArticles(category, index) && <ArticlesList
+              {/*               {showTitleArticles(category, index) && <ArticlesList
+                hideTitle={true}
                 style={{ background: '#e0e1e2 none', boxShadow: '0 0 black', border: 0, cursor: 'default', marginTop: 0 }}
                 styleCardsGroup={{ overflowX: 'hidden', flexWrap: 'nowrap' }}
                 {...props}
                 urlData={urlData}
-                articles={articles[category.id]} />}
+                articles={articles[category.id]} />} */}
             </div>
           </StyledAccordionTittle>
           <Accordion.Content style={{ padding: 0 }} active={activeIndex === index}>
             {articles[category.id] && articles[category.id].length > 0 && <ArticlesList
+              hideTitle={true}
               style={{ background: '#e0e1e2 none', borderRadius: '0 0 10px 10px', borderTopWidth: 0, marginBottom: '10px' }}
               {...props}
               urlData={urlData}
@@ -121,7 +124,7 @@ const CategoriesList = (props) => {
   }
 
   return <>
-    <Label size="huge" style={{ margin: '1em 1em 0em 1em' }}>{`Top 5 news categories from ${props.language.country}`}</Label>
+    <Label size="huge" style={{ margin: '1em 1em 0em 1em' }}>{`Top 5 news categories from ${language.country}`}</Label>
     <Segment loading={isBusy} style={{ margin: '10px', border: 0, boxShadow: '0 0 black' }}>
       {renderCategories()}
     </Segment>

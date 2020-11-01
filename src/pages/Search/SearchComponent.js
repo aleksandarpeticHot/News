@@ -1,51 +1,76 @@
-import React, { useState } from "react";
-import { Input, Label, Segment } from 'semantic-ui-react'
+import React, { useContext, useState } from "react";
+import { Label } from 'semantic-ui-react'
 import { getSearchResults } from '../../services/common/search'
 import ArticlesList from '../Articles/ArticlesList'
 import { debounce } from 'lodash'
 import notify from '../../services/common/notify'
+import { StyledInput, StyledSegment } from './style'
+import { LanguageContext } from "../../LanguageContext";
 
 const SearchComponent = (props) => {
+
+  const languageData = useContext(LanguageContext)
+
+  const { language } = languageData
 
   const [searchData, setSearchData] = useState({
     isBusy: false,
     results: [],
-    value: ''
+    searchValue: ''
   })
 
-  const { isBusy, results, value } = searchData
+  const { isBusy, results, searchValue } = searchData
 
   const handleSearch = debounce(async (text) => {
     try {
       setSearchData(prevData => ({ ...prevData, isBusy: true }))
-      const results = await getSearchResults(props.language, text)
+      let results = []
+      if (text !== '') {
+        const searchResponse = await getSearchResults(language.id, text)
+        results = searchResponse.data.articles
+      }
       setSearchData({
         ...searchData,
-        value: text,
-        results: results.data.articles,
+        searchValue: text,
+        results,
         isBusy: false
       })
     } catch (error) {
       notify(error.response.data.message, 'error')
       setSearchData({
         ...searchData,
-        value: text,
+        searchValue: text,
         results: [],
         isBusy: false
       })
     }
   }, 300)
 
-  return <Segment style={{ minHeight: '50vh', margin: '10px' }}>
-    <Label size="huge" style={{ margin: '1em 1em 0em 1em' }}>{`Search top news from ${props.language.country} by term:`}</Label>
-    <Input
-      loading={isBusy}
-      onChange={e => handleSearch(e.currentTarget.value)}
-      icon='newspaper'
-      iconPosition='left'
-      style={{ marginTop: '50px', minWidth: '50vw', marginLeft: '20%' }}
-      placeholder={'Search term...'} />
-    {results.length > 0 ? <ArticlesList urlData={{ articleGroup: 'q', articleId: value }} {...props} articles={results} /> : null}
-  </Segment>
+  const renderArticles = () => {
+    return results.length > 0 ?
+      (
+        <ArticlesList
+          hideTitle={true}
+          styleCardsGroup={{ overflowY: 'auto', maxHeight: '65vh', }}
+          urlData={{ articleGroup: 'q', articleId: searchValue }}
+          {...props}
+          articles={results} />
+      ) : null
+  }
+
+  return (
+    <StyledSegment>
+      <div className="wrapper">
+        <Label size="huge">{`Search top news from ${language.country} by term:`}</Label>
+        <StyledInput
+          loading={isBusy}
+          onChange={e => handleSearch(e.currentTarget.value)}
+          icon='newspaper'
+          iconPosition='left'
+          placeholder={'Search term...'} />
+      </div>
+      {searchValue !== '' && results.length === 0 ? <p className="noResultsMessage">{'There are no results to display...'}</p> : renderArticles()}
+    </StyledSegment>
+  )
 }
 export default SearchComponent
