@@ -9,9 +9,7 @@ import { LanguageContext } from "../../LanguageContext";
 
 const SearchComponent = (props) => {
 
-  const languageData = useContext(LanguageContext)
-
-  const { language } = languageData
+  const { language } = useContext(LanguageContext)
 
   const [searchData, setSearchData] = useState({
     isBusy: false,

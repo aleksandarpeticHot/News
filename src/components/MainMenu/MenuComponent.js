@@ -2,11 +2,9 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Menu } from 'semantic-ui-react'
 import { leftSideMenu, rightSideMenu } from '../../Constants'
-import { StyledMenu } from './index.style'
+import { StyledMenu } from './style'
 
-const MainMenu = (props) => {
-
-  console.log(props)
+const MenuComponent = (props) => {
 
   const [activeItem, setActiveItem] = useState()
 
@@ -47,4 +45,4 @@ const MainMenu = (props) => {
     </StyledMenu>
   </>
 }
-export default MainMenu
+export default MenuComponent

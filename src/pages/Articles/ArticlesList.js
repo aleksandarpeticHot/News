@@ -1,16 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import newsApi from '../../services/common/news'
 import { Card, Popup, Segment, Image, Icon, Ref, Label } from 'semantic-ui-react'
-import { StyledNewsTitle, StyledCardContent, StyledArrow } from './index.style'
+import { StyledNewsTitle, StyledCardContent, StyledArrow } from './style'
 import { RouteTypes } from '../../Constants'
 import notify from '../../services/common/notify'
 import { LanguageContext } from '../../LanguageContext'
 
 const ArticlesList = (props) => {
 
-  const languageData = useContext(LanguageContext)
-
-  const { language } = languageData
+  const { language } = useContext(LanguageContext)
 
   const [newsData, setNewsData] = useState({
     isBusy: false,

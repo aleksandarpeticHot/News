@@ -7,9 +7,7 @@ import { LanguageContext } from "../../../LanguageContext"
 
 const ArticlePage = (props) => {
 
-  const languageData = useContext(LanguageContext)
-
-  const { language, setDisableButtons } = languageData
+  const { language, setDisableButtons } = useContext(LanguageContext)
 
   const [data, setData] = useState({
     isBusy: false,

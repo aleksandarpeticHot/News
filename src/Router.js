@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom'
 import ArticlesList from '../src/pages/Articles/ArticlesList'
 import Article from './pages/Articles/Article/ArticlePage'
-import MainMenu from '../src/components/MainMenu'
+import MainMenu from './components/MainMenu/MenuComponent'
 import CategoriesList from '../src/pages/Categories/CategoriesList'
 import SearchComponent from '../src/pages/Search/SearchComponent'
 import { RouteTypes, rightSideMenu } from './Constants'
@@ -28,8 +28,8 @@ const Router = () => {
     )
   }
 
-  const onLanguageChange = (data) => {
-    setLanguage(data)
+  const onLanguageChange = (language) => {
+    setLanguage(language)
   }
 
   return <BrowserRouter>
@@ -40,7 +40,7 @@ const Router = () => {
       onLanguageChange={onLanguageChange}
     />
     <Switch>
-      <LanguageContext.Provider value={{ language, disableButtons, setDisableButtons }}>
+      <LanguageContext.Provider value={{ language, setDisableButtons }}>
         <PrivateRoute exact path={'/'} />
         <PrivateRoute exact path={RouteTypes.TOP_NEWS} component={ArticlesList} />
         <PrivateRoute exact path={RouteTypes.ARTICLE} component={Article} />

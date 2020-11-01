@@ -31,9 +31,7 @@ export const pageSize = 5
 
 const CategoriesList = (props) => {
 
-  const languageData = useContext(LanguageContext)
-
-  const { language } = languageData
+  const { language } = useContext(LanguageContext)
 
   const [articlesData, setArticlesData] = useState({
     isBusy: false,
