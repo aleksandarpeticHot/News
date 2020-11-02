@@ -17,14 +17,14 @@ export const leftSideMenu = [
 
 export const rightSideMenu = [
   {
-    name: 'GB',
-    id: 'gb',
-    country: 'Great Britain'
-  },
-  {
     name: 'US',
     id: 'us',
     country: 'USA'
+  },
+  {
+    name: 'GB',
+    id: 'gb',
+    country: 'Great Britain'
   }
 ]
 

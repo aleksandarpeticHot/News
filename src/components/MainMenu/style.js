@@ -25,8 +25,13 @@ li button {
   display: block;
   color: black;
   text-align: center;
+  border-radius: 5px;
   padding: 14px 16px;
   text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    background-color: #4183c4;
+   }
 }
 
 li a:hover {
@@ -35,4 +40,10 @@ li a:hover {
 .active {
   background-color: #111 !important;
 }
+
+.active-lang {
+  background-color: antiquewhite;
+}
+
+
 `

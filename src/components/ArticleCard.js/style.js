@@ -8,7 +8,11 @@ background: #fff;
 padding: 0;
 border: none;
 border-radius: .28571429rem;
+box-shadow: 2px 3px #888888;
 border: 1px solid  rgba(34, 36, 38, 0.1);
+ &:hover {
+  background-color: antiquewhite;
+ }
 img {
   border: 1px solid #ddd;
   border-radius: 4px;

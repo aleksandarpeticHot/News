@@ -26,6 +26,7 @@ const MenuComponent = (props) => {
         {rightSideMenu.map(item => {
           return <li key={item.name} style={{ float: 'right' }}>
             <button
+              className={props.language.id === item.id && !props.disableButtons ? 'active-lang' : ''}
               disabled={props.disableButtons}
               onClick={() => handleChangeLanguage(item)}
             >
