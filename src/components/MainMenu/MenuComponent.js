@@ -1,48 +1,40 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Button, Menu } from 'semantic-ui-react'
+import React from 'react'
 import { leftSideMenu, rightSideMenu } from '../../Constants'
 import { StyledMenu } from './style'
 
 const MenuComponent = (props) => {
 
-  const [activeItem, setActiveItem] = useState()
-
-  const handleItemClick = (e, { name }) => setActiveItem(name)
-
   const handleChangeLanguage = (language) => {
     props.onLanguageChange(language)
   }
 
-  return <>
-    <StyledMenu fluid inverted={true} pointing>
-      {leftSideMenu.map(item => {
-        return <Menu.Item
-          as={Link}
-          to={item.url}
-          key={item.name}
-          name={item.name}
-          active={activeItem === item.name || window.location.pathname === item.url}
-          onClick={handleItemClick}
-        />
-      })
-      }
-      <Menu.Menu position='right'>
-        {rightSideMenu.map(item => {
-          return <Menu.Item key={item.id}>
-            <Button
-              disabled={props.disableButtons}
-              id={item.id}
-              active={props.language.id === item.id}
-              onClick={() => handleChangeLanguage(item)}
-              icon
+  return <StyledMenu>
+    <ul>
+      <div>
+        {leftSideMenu.map(item => {
+          return <li key={item.name}>
+            <a
+              className={window.location.pathname === item.url ? 'active' : ''}
+              href={item.url}
             >
               {item.name}
-            </Button>
-          </Menu.Item>
+            </a>
+          </li>
         })}
-      </Menu.Menu>
-    </StyledMenu>
-  </>
+      </div>
+      <div>
+        {rightSideMenu.map(item => {
+          return <li key={item.name} style={{ float: 'right' }}>
+            <button
+              disabled={props.disableButtons}
+              onClick={() => handleChangeLanguage(item)}
+            >
+              {item.name}
+            </button>
+          </li>
+        })}
+      </div>
+    </ul>
+  </StyledMenu >
 }
 export default MenuComponent

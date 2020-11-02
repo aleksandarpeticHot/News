@@ -1,10 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
 import newsApi from '../../services/common/news'
-import { Card, Popup, Segment, Image, Icon, Ref, Label } from 'semantic-ui-react'
-import { StyledNewsTitle, StyledCardContent, StyledArrow } from './style'
 import { RouteTypes } from '../../Constants'
 import notify from '../../services/common/notify'
 import { LanguageContext } from '../../LanguageContext'
+import Card from '../../components/ArticleCard.js/Card'
+import HeaderComp from '../../components/Header/HeaderComp'
+import LoaderComp from '../../components/Loader/LoaderComp'
+import { StyledArticleGroup } from './style'
+
 
 const ArticlesList = (props) => {
 
@@ -34,7 +37,7 @@ const ArticlesList = (props) => {
       }))
     } catch (error) {
       notify(error.response.data.message, 'error')
-      setNewsData(prevData => ({ ...prevData, isBusy: false }))
+      setNewsData(prevData => ({ ...prevData, isBusy: true }))
     }
   }
 
@@ -43,50 +46,21 @@ const ArticlesList = (props) => {
     return RouteTypes.ARTICLE.replace(':articleGroup', articleGroup).replace(':articleId', articleId).replace(':index', index)
   }
 
-  const getArrows = () => {
-    return <>
-      <StyledArrow size="big" name="arrow alternate circle left outline"></StyledArrow>
-      <StyledArrow right="true" size="big" name="arrow alternate circle right outline"></StyledArrow>
-    </>
-  }
-
   const renderArticles = () => {
-    return <Ref>
-      <Card.Group stackable itemsPerRow={5} style={props.styleCardsGroup || { margin: 0 }}>
-        {articles.map((article, index) => {
-          const urlData = props.urlData || { articleGroup: 'country', articleId: 'gb', index: index }
-          const location = composeUrl(urlData, index)
-          return <Card key={index}>
-            <Card.Content>
-              <div>
-                <p style={{ marginBottom: 0, color: 'black' }}>{'Title'}</p>
-                <div style={{ marginBottom: '5px' }}>
-                  <Popup
-                    trigger={<StyledNewsTitle>{article.title}</StyledNewsTitle>}
-                    content={article.title} />
-                </div>
-              </div>
-              {article.urlToImage && <Image
-                size='small'
-                src={article.urlToImage}
-              />
-              }
-            </Card.Content>
-            <Card.Content extra>
-              <StyledCardContent onClick={() => props.history.push(location)} style={{ float: 'right', cursor: 'pointer' }}>
-                {'More'}
-                <Icon name='angle right' />
-              </StyledCardContent>
-            </Card.Content >
-          </Card>
-        })}
-      </Card.Group>
-    </Ref>
+    console.log(props.style)
+    return <StyledArticleGroup style={props.style}>
+      {articles.map((article, index) => {
+        const urlData = props.urlData || { articleGroup: 'country', articleId: 'gb', index: index }
+        const url = composeUrl(urlData, index)
+        return <Card key={index} articlePage={url} {...article}></Card>
+      })}
+    </StyledArticleGroup>
   }
 
-  return <Segment style={props.style} loading={isBusy}>
-    {!props.hideTitle && <Label size="huge" >{`Top 5 news from ${language.country}`}</Label>}
+  return <div>
+    {!props.hideTitle && <HeaderComp title={`Top 5 news from ${language.country}`} />}
+    <LoaderComp isBusy={isBusy} />
     {renderArticles()}
-  </Segment>
+  </div>
 }
 export default ArticlesList

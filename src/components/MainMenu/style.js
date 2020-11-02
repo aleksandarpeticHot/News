@@ -1,8 +1,38 @@
-import { Menu } from 'semantic-ui-react'
 import styled from 'styled-components'
 
-export const StyledMenu = styled(Menu)`
-height: 50px;
-border-radius: 0 !important;
-margin-top: 0 !important;
+export const StyledMenu = styled.div`
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li button {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+.active {
+  background-color: #111 !important;
+}
 `

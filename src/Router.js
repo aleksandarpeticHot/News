@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState } from 'react'
 import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom'
 import ArticlesList from '../src/pages/Articles/ArticlesList'
 import Article from './pages/Articles/Article/ArticlePage'

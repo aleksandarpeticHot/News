@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react"
-import { Header, Icon, Image, Segment } from 'semantic-ui-react'
 import { useParams } from 'react-router-dom'
 import articleApi from '../../../services/common/news'
 import notify from '../../../services/common/notify'
 import { LanguageContext } from "../../../LanguageContext"
+import HeaderComp from '../../../components/Header/HeaderComp'
 
 const ArticlePage = (props) => {
 
@@ -38,21 +38,13 @@ const ArticlePage = (props) => {
     }
   }
 
-  const displayContent = () => {
-    const { content } = article
-    if (content && content.length > 260) {
-      return content.substring(0, 260)
-    }
-    return content
-  }
-
   const handleBack = () => {
     props.history.goBack()
   }
 
-  return <Segment loading={isBusy}>
-    <Header style={{ margin: '10px 0' }}>{article.title}</Header>
-    {article.urlToImage && <Image
+  return <div style={{ margin: '15px' }}>
+    <HeaderComp title={article.title} />
+    {article.urlToImage && <img
       style={{
         maxWidth: '70vw',
         maxHeight: '50vh',
@@ -61,11 +53,10 @@ const ArticlePage = (props) => {
       src={article.urlToImage}
     />
     }
-    <p style={{ marginTop: '10px' }}>{displayContent()}</p>
+    <p style={{ marginTop: '10px' }}>{article.content}</p>
     <a onClick={handleBack} style={{ display: 'flex', cursor: 'pointer' }}>
-      <Icon name="angle left"></Icon>
-      <p>{'Back to the list'}</p>
+      <p>{'< Back to the list'}</p>
     </a >
-  </Segment>
+  </div>
 }
 export default ArticlePage
