@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { categories } from '../../Constants'
 import { CategoryWrapper, CategoryContent } from './style'
 import categorieApi from '../../services/common/categories'
@@ -12,6 +12,7 @@ import technology from '../../mockups/technology.json'
 import { LanguageContext } from '../../LanguageContext'
 import Accordion from '../../components/Accordion/Accordion'
 import HeaderComp from '../../components/Header/HeaderComp'
+import CarouselComp from '../../components/Carousel/CarouselComp'
 import LoaderComp from '../../components/Loader/LoaderComp'
 
 
@@ -76,25 +77,30 @@ const CategoriesList = () => {
           articleId: category.id
         }
         return <Accordion
-          {...urlData}
           active={activeIndex === index}
           index={index}
           handleClick={handleClick}
           categoryTitle={category.title}
-          articles={articles[category.id]}
           key={index}
-        />
+        >
+          <CarouselComp
+            slides={articles[category.id]}
+            {...urlData}
+          />
+        </Accordion>
       })}
     </div>
   }
 
-  return <CategoryWrapper>
-    <HeaderComp style={{ padding: '15px', marginLeft: 0 }} title={`Top 5 news categories from ${language.country}:`} />
-    <CategoryContent>
-      <LoaderComp isBusy={isBusy} />
-      {Object.keys(articles).length > 0 && renderCategories()}
-    </CategoryContent>
-  </CategoryWrapper>
+  return (
+    <CategoryWrapper>
+      <CategoryContent>
+        <HeaderComp title={`Top 5 news categories from ${language.country}:`} />
+        <LoaderComp isBusy={isBusy} />
+        {Object.keys(articles).length > 0 && renderCategories()}
+      </CategoryContent>
+    </CategoryWrapper>
+  )
 
 }
 export default CategoriesList

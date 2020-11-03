@@ -56,10 +56,12 @@ const ArticlesList = (props) => {
     </StyledArticleGroup>
   }
 
-  return <div>
-    {!props.hideTitle && <HeaderComp title={`Top 5 news from ${language.country}`} />}
-    <LoaderComp isBusy={isBusy} />
-    {renderArticles()}
-  </div>
+  return (
+    <div>
+      {!props.hideTitle && <HeaderComp style={{ display: 'flex', justifyContent: 'center' }} title={`Top 5 news from ${language.country}:`} />}
+      <LoaderComp isBusy={isBusy} />
+      {articles.length > 0 && renderArticles()}
+    </div>
+  )
 }
 export default ArticlesList

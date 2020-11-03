@@ -1,6 +1,6 @@
 import React from 'react'
 import { leftSideMenu, rightSideMenu } from '../../Constants'
-import { StyledMenu } from './style'
+import { StyledMenu, LanguageButton } from './style'
 
 const MenuComponent = (props) => {
 
@@ -25,13 +25,13 @@ const MenuComponent = (props) => {
       <div>
         {rightSideMenu.map(item => {
           return <li key={item.name} style={{ float: 'right' }}>
-            <button
-              className={props.language.id === item.id && !props.disableButtons ? 'active-lang' : ''}
+            <LanguageButton
+              active={props.language.id === item.id && !props.disableButtons}
               disabled={props.disableButtons}
               onClick={() => handleChangeLanguage(item)}
             >
               {item.name}
-            </button>
+            </LanguageButton>
           </li>
         })}
       </div>

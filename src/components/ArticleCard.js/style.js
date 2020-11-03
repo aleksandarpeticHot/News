@@ -29,9 +29,8 @@ p .title{
 }
 a{
   cursor: pointer;
-  display: block;
-  padding: 10px;
-  text-align: end;
+  display: flex;  
+  justify-content: flex-end;
 }
 `
 export const StyledDescription = styled.p`

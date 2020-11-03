@@ -51,7 +51,7 @@ const SearchComponent = (props) => {
         <ArticlesList
           {...props}
           hideTitle={true}
-          style={{ overflowY: 'auto', maxHeight: '75vh', margin: '10px', border: '1px solid', borderRadius: '5px' }}
+          style={{ overflowY: 'auto', maxHeight: '75vh', margin: '10px' }}
           urlData={{ articleGroup: 'q', articleId: searchValue }}
           articles={results} />
       ) : null
@@ -61,7 +61,7 @@ const SearchComponent = (props) => {
     <StyledSegment>
       <div className="wrapper">
         <div>
-          <HeaderComp title={`Search top news from ${language.country} by term:`} />
+          <HeaderComp style={{ marginLeft: '20%' }} title={`Search top news from ${language.country} by term:`} />
           <StyledInput
             onChange={e => handleSearch(e.currentTarget.value)}
             icon='newspaper'

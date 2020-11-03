@@ -26,27 +26,21 @@ li a {
   text-decoration: none;
 }
 
-li button {
-  display: block;
-  color: black;
-  text-align: center;
-  border-radius: 5px;
-  padding: 14px 16px;
-  text-decoration: none;
-  cursor: pointer;
-  &:hover {
-    background-color: #4183c4;
-   }
-}
-
 li a:hover {
   background-color: #3498db;
 }
-.active {
-  background-color: #3498db;
-}
+`
 
-.active-lang {
-  background-color: antiquewhite;
-}
+export const LanguageButton = styled.button`
+display: block;
+color: black;
+text-align: center;
+border-radius: 5px;
+padding: 14px 16px;
+text-decoration: none;
+cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
+&:hover {
+  background-color: ${props => props.disabled ? '' : '#4183c4'} ;
+ }
+background-color: ${props => props.active ? 'antiquewhite' : '-internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59));'};
 `
