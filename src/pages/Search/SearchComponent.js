@@ -51,7 +51,7 @@ const SearchComponent = (props) => {
         <ArticlesList
           {...props}
           hideTitle={true}
-          style={{ overflowY: 'auto', maxHeight: '75vh', }}
+          style={{ overflowY: 'auto', maxHeight: '75vh', margin: '10px', border: '1px solid', borderRadius: '5px' }}
           urlData={{ articleGroup: 'q', articleId: searchValue }}
           articles={results} />
       ) : null
@@ -60,12 +60,14 @@ const SearchComponent = (props) => {
   return (
     <StyledSegment>
       <div className="wrapper">
-        <HeaderComp title={`Search top news from ${language.country} by term:`} />
-        <StyledInput
-          onChange={e => handleSearch(e.currentTarget.value)}
-          icon='newspaper'
-          iconPosition='left'
-          placeholder={'Search term...'} />
+        <div>
+          <HeaderComp title={`Search top news from ${language.country} by term:`} />
+          <StyledInput
+            onChange={e => handleSearch(e.currentTarget.value)}
+            icon='newspaper'
+            iconPosition='left'
+            placeholder={'Search term...'} />
+        </div>
       </div>
       <LoaderComp isBusy={isBusy} />
       {searchValue !== '' && results.length === 0 ? <p className="noResultsMessage">{'There are no results to display...'}</p> : renderArticles()}

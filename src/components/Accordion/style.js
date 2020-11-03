@@ -31,10 +31,10 @@ align-items: center;
 position: relative;
 overflow: hidden;
 .slide{
+  margin-bottom: 10px;
   margin: 0 15px;
   transition: 0.3s;
   height: 100%;  
-  min-width: 290px;
   min-height: 100px;
 
 }
@@ -44,11 +44,13 @@ overflow: hidden;
   top: 50%;
   transform: translateY(-50%);
   left: 0;
+  padding: inherit;
   width: 5%;
 }
 
 .goRight{
   position: absolute;
+  padding: inherit;
   top: 50%;
   transform: translateY(-50%);
   right: 0;

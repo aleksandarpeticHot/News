@@ -4,6 +4,7 @@ import articleApi from '../../../services/common/news'
 import notify from '../../../services/common/notify'
 import { LanguageContext } from "../../../LanguageContext"
 import HeaderComp from '../../../components/Header/HeaderComp'
+import { StyledWrapper } from './style'
 
 const ArticlePage = (props) => {
 
@@ -42,8 +43,8 @@ const ArticlePage = (props) => {
     props.history.goBack()
   }
 
-  return <div style={{ margin: '15px' }}>
-    <HeaderComp title={article.title} />
+  return <StyledWrapper>
+    <HeaderComp style={{ marginLeft: 0 }} title={article.title} />
     {article.urlToImage && <img
       style={{
         maxWidth: '70vw',
@@ -55,8 +56,8 @@ const ArticlePage = (props) => {
     }
     <p style={{ marginTop: '10px' }}>{article.content}</p>
     <a onClick={handleBack} style={{ display: 'flex', cursor: 'pointer' }}>
-      <p>{'< Back to the list'}</p>
+      <p style={{ color: 'white' }}>{'< Back to the list'}</p>
     </a >
-  </div>
+  </StyledWrapper>
 }
 export default ArticlePage

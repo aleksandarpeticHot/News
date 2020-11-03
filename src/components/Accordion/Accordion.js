@@ -3,7 +3,8 @@ import { AccordionWrapper, Slyder, AccordionContent, AccordionStyled } from './s
 import { RouteTypes } from '../../Constants'
 import Card from '../ArticleCard.js/Card'
 
-export const widthOfSingleArticle = 305
+export const widthOfSingleArticle = 362
+export const articleMarginAnPadding = 52
 
 const Accordion = (props) => {
 
@@ -11,30 +12,42 @@ const Accordion = (props) => {
 
   const [disableSlider, setDisableSlider] = useState(false)
 
+  const [cardWidth, setCardWidth] = useState(0)
+
   const { articles, index, active, handleClick, categoryTitle } = props
 
-  useEffect(() => {
+  const handleResize = () => {
     const currentAvailableSpace = accordionRef.current.offsetWidth
+    const cardsFit = Math.round(currentAvailableSpace / widthOfSingleArticle)
     const disableSlider = Math.round(currentAvailableSpace / articles.length) > widthOfSingleArticle
+    setCardWidth(Math.floor((currentAvailableSpace / cardsFit) - articleMarginAnPadding))
     setDisableSlider(disableSlider)
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+    const currentAvailableSpace = accordionRef.current.offsetWidth
+    const cardsFit = Math.round(currentAvailableSpace / widthOfSingleArticle)
+    const disableSlider = Math.round(currentAvailableSpace / articles.length) > widthOfSingleArticle
+    setCardWidth(Math.floor((currentAvailableSpace / cardsFit) - articleMarginAnPadding))
+    setDisableSlider(disableSlider)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
   }, [props])
 
   const [x, setX] = useState(0)
 
   const goLeft = () => {
-    const currentAvailableSpace = accordionRef.current.offsetWidth
-    const numberOfCards = articles.length - 1
-    const numOfCardsFit = currentAvailableSpace / widthOfSingleArticle
-    const positionOfLastCarad = currentAvailableSpace * ((numberOfCards) / (numOfCardsFit)) - 2 * widthOfSingleArticle
-    Math.round(x) === 0 ? setX(-positionOfLastCarad) : setX(x + widthOfSingleArticle)
+    const widthSlide = cardWidth + 52
+    const availableSpace = widthSlide * (articles.length - 3)
+    Math.round(x) === 0 ? setX(-availableSpace) : setX(x + widthSlide)
   }
 
   const goRight = () => {
-    const currentAvailableSpace = accordionRef.current.offsetWidth
-    const numberOfCards = articles.length - 1
-    const numOfCardsFit = accordionRef.current.offsetWidth / widthOfSingleArticle
-    const positionOfLastCarad = currentAvailableSpace * ((numberOfCards) / (numOfCardsFit)) - 2 * widthOfSingleArticle
-    x === -Math.round(positionOfLastCarad) ? setX(0) : setX(x - widthOfSingleArticle)
+    const widthSlide = cardWidth + 52
+    const availableSpace = widthSlide * (articles.length - 3)
+    x === -Math.round(availableSpace) ? setX(0) : setX(x - widthSlide)
   }
 
   const handleClickAccordion = () => {
@@ -60,7 +73,7 @@ const Accordion = (props) => {
           {props.articles.map((article, index) => {
             const url = composeUrl(index)
             return <div style={{ transform: `translateX(${x}px)` }} key={index} className="slide">
-              <Card articlePage={url} {...article}></Card>
+              <Card style={{ width: `${cardWidth}px`, margin: 0, marginBottom: '10px', }} articlePage={url} {...article}></Card>
             </div>
           })}
           {!disableSlider && <>

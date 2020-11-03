@@ -47,7 +47,6 @@ const ArticlesList = (props) => {
   }
 
   const renderArticles = () => {
-    console.log(props.style)
     return <StyledArticleGroup style={props.style}>
       {articles.map((article, index) => {
         const urlData = props.urlData || { articleGroup: 'country', articleId: 'gb', index: index }

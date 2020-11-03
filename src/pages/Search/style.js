@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const StyledInput = styled.input`
 margin-top: 30px;
-min-width: 50vw;
+min-width: 40vw;
 margin-left: 20%;
 padding: .67857143em 1em;
 -webkit-tap-highlight-color: rgba(255,255,255,0);
@@ -12,10 +12,10 @@ color: rgba(0,0,0,.87);
 border-radius: .28571429rem;
 `
 export const StyledSegment = styled.div`
-min-height: 90vh;
-margin: 10px;
+height: calc(100vh - 47px);
 .wrapper{
-  height: 15vh;
+  width: 100%;
+  height: 15%;
   display: inline-block;
 }
 .noResultsMessage{
