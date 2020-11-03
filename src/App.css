@@ -1,7 +1,8 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: "Oswald", sans;
+  background-image: linear-gradient(to bottom, #d59254, #cf7693);
 }
 
 a {

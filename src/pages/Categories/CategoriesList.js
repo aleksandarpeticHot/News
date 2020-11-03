@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState, useContext } from 'react'
 import { categories } from '../../Constants'
-import { StyledAccordionTittle, StyledSegment, StyledTitleDiv } from './style'
+import { CategoryWrapper, CategoryContent } from './style'
 import categorieApi from '../../services/common/categories'
 import ArticlesList from '../Articles/ArticlesList'
 import notify from '../../services/common/notify'
@@ -15,18 +15,6 @@ import Accordion from '../../components/Accordion/Accordion'
 import HeaderComp from '../../components/Header/HeaderComp'
 import LoaderComp from '../../components/Loader/LoaderComp'
 
-
-export const style = {
-  background: '#e0e1e2 none',
-  marginBottom: '10px'
-}
-
-export const activeStyle = {
-  background: '#e0e1e2 none',
-  borderBottom: 0,
-  marginBottom: 0,
-  borderRadius: '10px 10px 0 0'
-}
 
 export const pageSize = 5
 
@@ -102,13 +90,13 @@ const CategoriesList = (props) => {
     </div>
   }
 
-  return <>
+  return <CategoryWrapper>
     <HeaderComp title={`Top 5 news categories from ${language.country}:`} />
-    <div style={{ margin: '15px' }}>
+    <CategoryContent>
       <LoaderComp isBusy={isBusy} />
       {Object.keys(articles).length > 0 && renderCategories()}
-    </div>
-  </>
+    </CategoryContent>
+  </CategoryWrapper>
 
 }
 export default CategoriesList

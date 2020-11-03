@@ -1,6 +1,11 @@
 import styled from 'styled-components'
 
 export const StyledMenu = styled.div`
+list-style-type: none;
+margin: 0;
+padding: 0;
+overflow: hidden;
+background-color: #34495e;
 ul {
   list-style-type: none;
   margin: 0;
@@ -35,15 +40,13 @@ li button {
 }
 
 li a:hover {
-  background-color: #111;
+  background-color: #3498db;
 }
 .active {
-  background-color: #111 !important;
+  background-color: #3498db;
 }
 
 .active-lang {
   background-color: antiquewhite;
 }
-
-
 `
