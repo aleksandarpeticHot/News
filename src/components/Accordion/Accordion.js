@@ -3,50 +3,64 @@ import { AccordionWrapper, Slyder, AccordionContent, AccordionStyled } from './s
 import { RouteTypes } from '../../Constants'
 import Card from '../ArticleCard.js/Card'
 
-export const widthOfSingleArticle = 362
+export const defaultCardWidth = 362
 export const articleMarginAnPadding = 52
 
 const Accordion = (props) => {
 
   const accordionRef = useRef(null);
 
-  const [disableSlider, setDisableSlider] = useState(false)
+  const [cardData, setCardData] = useState({
+    cardWidth: 0,
+    disableSlider: false,
+    cardsFit: 0
+  })
 
-  const [cardWidth, setCardWidth] = useState(0)
+  const { cardWidth, disableSlider, cardsFit } = cardData
 
   const { articles, index, active, handleClick, categoryTitle } = props
 
+  const [x, setX] = useState(0)
+
   const handleResize = () => {
     const currentAvailableSpace = accordionRef.current.offsetWidth
-    const cardsFit = Math.round(currentAvailableSpace / widthOfSingleArticle)
-    const disableSlider = Math.round(currentAvailableSpace / articles.length) > widthOfSingleArticle
-    setCardWidth(Math.floor((currentAvailableSpace / cardsFit) - articleMarginAnPadding))
-    setDisableSlider(disableSlider)
+    const cardsFit = Math.round(currentAvailableSpace / defaultCardWidth)
+    const disableSlider = cardsFit >= articles.length
+    const cardWidth = Math.floor((currentAvailableSpace / cardsFit) - articleMarginAnPadding)
+    setCardData({
+      ...cardData,
+      cardWidth,
+      cardsFit,
+      disableSlider
+    })
   }
 
   useEffect(() => {
     window.addEventListener('resize', handleResize)
     const currentAvailableSpace = accordionRef.current.offsetWidth
-    const cardsFit = Math.round(currentAvailableSpace / widthOfSingleArticle)
-    const disableSlider = Math.round(currentAvailableSpace / articles.length) > widthOfSingleArticle
-    setCardWidth(Math.floor((currentAvailableSpace / cardsFit) - articleMarginAnPadding))
-    setDisableSlider(disableSlider)
+    const cardsFit = Math.round(currentAvailableSpace / defaultCardWidth)
+    const disableSlider = cardsFit >= articles.length
+    const cardWidth = Math.floor((currentAvailableSpace / cardsFit) - articleMarginAnPadding)
+    setCardData({
+      ...cardData,
+      cardWidth,
+      cardsFit,
+      disableSlider
+    })
     return () => {
       window.removeEventListener('resize', handleResize)
     }
   }, [props])
 
-  const [x, setX] = useState(0)
-
   const goLeft = () => {
     const widthSlide = cardWidth + 52
-    const availableSpace = widthSlide * (articles.length - 3)
+    const availableSpace = widthSlide * (articles.length - cardsFit)
     Math.round(x) === 0 ? setX(-availableSpace) : setX(x + widthSlide)
   }
 
   const goRight = () => {
     const widthSlide = cardWidth + 52
-    const availableSpace = widthSlide * (articles.length - 3)
+    const availableSpace = widthSlide * (articles.length - cardsFit)
     x === -Math.round(availableSpace) ? setX(0) : setX(x - widthSlide)
   }
 

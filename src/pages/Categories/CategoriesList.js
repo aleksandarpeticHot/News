@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useState, useContext } from 'react'
 import { categories } from '../../Constants'
 import { CategoryWrapper, CategoryContent } from './style'
 import categorieApi from '../../services/common/categories'
-import ArticlesList from '../Articles/ArticlesList'
 import notify from '../../services/common/notify'
 import entertainment from '../../mockups/entertainment.json'
 import general from '../../mockups/general.json'
@@ -18,7 +17,7 @@ import LoaderComp from '../../components/Loader/LoaderComp'
 
 export const pageSize = 5
 
-const CategoriesList = (props) => {
+const CategoriesList = () => {
 
   const { language } = useContext(LanguageContext)
 
@@ -65,7 +64,6 @@ const CategoriesList = (props) => {
   }
 
   const handleClick = (index) => {
-    console.log(index)
     const newIndex = activeIndex === index ? -1 : index
     setActiveIndex(newIndex)
   }
@@ -91,7 +89,7 @@ const CategoriesList = (props) => {
   }
 
   return <CategoryWrapper>
-    <HeaderComp title={`Top 5 news categories from ${language.country}:`} />
+    <HeaderComp style={{ padding: '15px', marginLeft: 0 }} title={`Top 5 news categories from ${language.country}:`} />
     <CategoryContent>
       <LoaderComp isBusy={isBusy} />
       {Object.keys(articles).length > 0 && renderCategories()}

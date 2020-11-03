@@ -13,6 +13,7 @@ width: 80%;
 `
 export const CategoryContent = styled.div`
 margin: 15px;
+margin-top: 50px;
 border: 1px solid black;
 border-radius: 5px;
 padding: 15px;
