@@ -1,7 +1,8 @@
 import styled from "styled-components"
+import { DEFAULT_ARTICLE_CARD_WIDTH } from '../../Constants'
 
 export const CardStyled = styled.div`
-width: 310px;
+width: ${DEFAULT_ARTICLE_CARD_WIDTH}px;
 margin: 15px;
 min-height: 0;
 margin-bottom: 10px;
@@ -21,25 +22,20 @@ img {
   height: 100px;
   width: 150px;
 }
-p .title{
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin: 1em;
-}
 a{
   cursor: pointer;
   display: flex;  
   justify-content: flex-end;
 }
 `
-export const StyledDescription = styled.p`
+export const StyledParagraph = styled.p`
 text-overflow: ellipsis;
 white-space: normal;
 font-size: medium;
 -webkit-line-clamp: 2;
 -webkit-box-orient: vertical;
 overflow: hidden;
+font-weight: ${props => props.header ? '700' : '200'};
 min-height: 36px;
 max-height: 36px;
 text-overflow: ellipsis;

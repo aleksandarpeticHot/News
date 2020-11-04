@@ -10,13 +10,11 @@ display: flex;
 align-items: center;
 position: relative;
 overflow: hidden;
-.slide{
-  margin-bottom: 10px;
-  margin: 0 15px;
+.slide{   
+  margin: 10px 15px;
   transition: 0.3s;
   height: 100%;  
   min-height: 100px;
-
 }
 
 .goLeft{

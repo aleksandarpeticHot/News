@@ -21,22 +21,28 @@ const ArticlesList = (props) => {
   const { isBusy, articles } = newsData
 
   useEffect(() => {
+    console.log('a', props)
     if (!props.articles) {
       fetchNews()
     }
-  }, [])
+  }, [props])
 
   const fetchNews = async () => {
     setNewsData(prevData => ({ ...prevData, isBusy: true }))
     try {
-      const newsResponse = await newsApi.getTopNews(props.language.id)
+      const newsResponse = await newsApi.getTopNews(language.id)
       setNewsData(prevData => ({
         ...prevData,
         articles: newsResponse.data.articles,
         isBusy: false
       }))
     } catch (error) {
-      notify(error.response.data.message, 'error')
+      if (error.response) {
+        notify(error.response.data.message, 'error')
+      }
+      else {
+        notify('General error.', 'error')
+      }
       setNewsData(prevData => ({ ...prevData, isBusy: true }))
     }
   }
@@ -47,18 +53,25 @@ const ArticlesList = (props) => {
   }
 
   const renderArticles = () => {
-    return <StyledArticleGroup style={props.style}>
-      {articles.map((article, index) => {
-        const urlData = props.urlData || { articleGroup: 'country', articleId: 'gb', index: index }
-        const url = composeUrl(urlData, index)
-        return <Card key={index} articlePage={url} {...article}></Card>
-      })}
-    </StyledArticleGroup>
+    return (
+      <StyledArticleGroup style={props.style}>
+        {articles.map((article, index) => {
+          const urlData = props.urlData || { articleGroup: 'country', articleId: 'gb', index: index }
+          const url = composeUrl(urlData, index)
+          return (
+            <Card
+              key={index}
+              articlePage={url}
+              {...article} />
+          )
+        })}
+      </StyledArticleGroup>
+    )
   }
 
   return (
     <div>
-      {!props.hideTitle && <HeaderComp style={{ display: 'flex', justifyContent: 'center' }} title={`Top 5 news from ${language.country}:`} />}
+      {!props.hideTitle && <HeaderComp style={{ display: 'flex', justifyContent: 'center' }} title={`Top news from the ${language.country}:`} />}
       <LoaderComp isBusy={isBusy} />
       {articles.length > 0 && renderArticles()}
     </div>

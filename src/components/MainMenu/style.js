@@ -14,6 +14,10 @@ ul {
   background-color: #333;
 }
 
+.active {
+  background-color: #3498db;
+}
+
 li {
   float: left;
 }

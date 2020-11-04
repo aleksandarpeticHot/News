@@ -36,7 +36,12 @@ const ArticlePage = (props) => {
         article: responseArticles.data.articles[index]
       })
     } catch (error) {
-      notify(error.response.data.message, 'error')
+      if (error.response) {
+        notify(error.response.data.message, 'error')
+      }
+      else {
+        notify('General error.', 'error')
+      }
       setData(prevData => ({ ...prevData, isBusy: false }))
     }
   }
@@ -51,8 +56,8 @@ const ArticlePage = (props) => {
       {article.urlToImage && <StyledImage src={article.urlToImage} />}
       <StyledContent style={{ marginTop: '10px' }}>{article.content}</StyledContent>
       <StyledBackTo onClick={handleBack}>
-        <Chevron position={'left'} fill={'white'} width={15}></Chevron>
-        <p style={{ color: 'white' }}>{'Back to the list'}</p>
+        <Chevron position={'left'} fill={'#4183c4'} width={14}></Chevron>
+        <p>{'Back to the list'}</p>
       </StyledBackTo >
       <LoaderComp isBusy={isBusy} />
     </StyledWrapper>

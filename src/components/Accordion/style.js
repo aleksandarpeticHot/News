@@ -38,8 +38,9 @@ transition: background-color 0.6s ease;
 }
 `
 export const AccordionContent = styled.div`
-background-color: #eee;
-box-shadow: 2px 3px #888888;
+background-color: #eee; 
+border-radius: 0 0 7px 7px;
+box-shadow: 2px 3px #444;
 overflow: auto;
 transition: max-height 0.3s ease;
 margin-bottom: ${props => props.active ? '10px' : 0};

@@ -59,7 +59,12 @@ const CategoriesList = () => {
         isBusy: false
       })
     } catch (error) {
-      notify(error.response.data.message, 'error')
+      if (error.response) {
+        notify(error.response.data.message, 'error')
+      }
+      else {
+        notify('General error.', 'error')
+      }
       setArticlesData(prevData => ({ ...prevData, isBusy: false }))
     }
   }
@@ -70,32 +75,36 @@ const CategoriesList = () => {
   }
 
   const renderCategories = () => {
-    return <div>
-      {categories.map((category, index) => {
-        const urlData = {
-          articleGroup: 'category',
-          articleId: category.id
-        }
-        return <Accordion
-          active={activeIndex === index}
-          index={index}
-          handleClick={handleClick}
-          categoryTitle={category.title}
-          key={index}
-        >
-          <CarouselComp
-            slides={articles[category.id]}
-            {...urlData}
-          />
-        </Accordion>
-      })}
-    </div>
+    return (
+      <div>
+        {categories.map((category, index) => {
+          const urlData = {
+            articleGroup: 'category',
+            articleId: category.id
+          }
+          return (
+            <Accordion
+              active={activeIndex === index}
+              index={index}
+              handleClick={handleClick}
+              categoryTitle={category.title}
+              key={index}
+            >
+              <CarouselComp
+                slides={articles[category.id]}
+                {...urlData}
+              />
+            </Accordion>
+          )
+        })}
+      </div>
+    )
   }
 
   return (
     <CategoryWrapper>
       <CategoryContent>
-        <HeaderComp title={`Top 5 news categories from ${language.country}:`} />
+        <HeaderComp title={`Top 5 news by categories from the ${language.country}:`} />
         <LoaderComp isBusy={isBusy} />
         {Object.keys(articles).length > 0 && renderCategories()}
       </CategoryContent>

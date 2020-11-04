@@ -8,7 +8,7 @@ color: black;
 `
 export const CategoryWrapper = styled.div`
 margin: auto;
-min-height: calc(100vh - 66px);
+min-height: calc(100vh - 67px);
 width: 80%;
 `
 export const CategoryContent = styled.div`

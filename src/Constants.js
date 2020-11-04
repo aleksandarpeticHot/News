@@ -6,13 +6,13 @@ export const RouteTypes = Object.assign({
   ARTICLE: '/article/:articleGroup/:articleId/:index'
 })
 
-export const apiKey = '66ab60b83a2a49a3958178b548b3f904'
+export const apiKey = 'b20fd54dfbc94176a3acf4969eb7520e'
 
 //should be defined is some config file coming from the api
 export const leftSideMenu = [
-  { name: 'Top News', url: '/articles-list' },
-  { name: 'Categories', url: '/categories' },
-  { name: 'Search', url: '/search' }
+  { name: 'Top News', url: RouteTypes.TOP_NEWS },
+  { name: 'Categories', url: RouteTypes.CATEGORIES },
+  { name: 'Search', url: RouteTypes.SEARCH }
 ]
 
 export const rightSideMenu = [
@@ -72,4 +72,13 @@ export const rightChevron = {
   c7.043,7.043,15.612,10.564,25.697,10.564c10.089,0,18.656-3.521,25.697-10.564l186.145-185.864
   c7.046-7.423,10.571-16.084,10.571-25.981C362.597,212.321,359.071,203.755,352.025,196.712z`,
   viewbox: "0 0 444.819 444.819"
+}
+
+export const DEFAULT_ARTICLE_CARD_WIDTH = 310
+
+export const LabelsToTranslate = {
+  BACK_TO_LIST: 'Back to the list',
+  TOP_NEWS_HEADER: 'Top news from',
+  CATEGORIE_HEADER: 'Top 5 news by categories from',
+  NO_RESULTS_MESSAGE: 'There are no results to display...'
 }

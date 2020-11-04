@@ -2,8 +2,8 @@ import styled from 'styled-components'
 
 export const StyledLoader = styled.div`
 border-radius: 50%;
-width: 20px;
-height: 20px;
+width: 30px;
+height: 30px;
 border: 4px solid #f3f3f3;
 border-top: 4px solid #3498db; 
 position: absolute;

@@ -3,9 +3,10 @@ import { RouteTypes } from '../../Constants'
 import Card from '../ArticleCard.js/Card'
 import { StyledCarousel } from './style'
 import Chevron from '../Chevron'
+import { DEFAULT_ARTICLE_CARD_WIDTH } from '../../Constants'
 
-export const defaultCardWidth = 362
 export const articleMarginAnPadding = 52
+export const defaultCardWidth = DEFAULT_ARTICLE_CARD_WIDTH + articleMarginAnPadding
 
 const CarouselComp = (props) => {
 
@@ -34,6 +35,7 @@ const CarouselComp = (props) => {
       slideFit,
       disableSlider
     })
+    setCarouselTranslateX(0)
   }
 
   const handleResize = () => {
