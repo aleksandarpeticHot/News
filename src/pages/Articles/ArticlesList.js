@@ -21,7 +21,6 @@ const ArticlesList = (props) => {
   const { isBusy, articles } = newsData
 
   useEffect(() => {
-    console.log('a', props)
     if (!props.articles) {
       fetchNews()
     }

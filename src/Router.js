@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom'
+import { Switch, Route, BrowserRouter } from 'react-router-dom'
 import ArticlesList from '../src/pages/Articles/ArticlesList'
 import Article from './pages/Articles/Article/ArticlePage'
 import CategoriesList from '../src/pages/Categories/CategoriesList'

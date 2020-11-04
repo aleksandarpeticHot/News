@@ -19,7 +19,6 @@ const SearchComponent = (props) => {
     isBusy: false,
     results: [],
     searchValue: '',
-    typeValue: ''
   })
 
   const { isBusy, results, searchValue } = searchData
@@ -44,6 +43,7 @@ const SearchComponent = (props) => {
       }
       setSearchData({
         ...searchData,
+        searchValue: text,
         results,
         isBusy: false
       })

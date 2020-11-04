@@ -29,7 +29,11 @@ const ArticlePage = (props) => {
   const getArticle = async () => {
     setData(prevData => ({ ...prevData, isBusy: true }))
     try {
-      const responseArticles = await articleApi.getArticle(language.id, articleGroup, articleId)
+      let responseArticles = {}
+      if (articleGroup === 'country') {
+        responseArticles = await articleApi.getTopNews(language.id)
+      }
+      responseArticles = await articleApi.getArticle(language.id, articleGroup, articleId)
       setData({
         ...data,
         isBusy: false,
@@ -52,15 +56,19 @@ const ArticlePage = (props) => {
 
   return (
     <StyledWrapper>
-      <HeaderComp style={{ marginLeft: 0 }} title={article.title} />
-      {article.urlToImage && <StyledImage src={article.urlToImage} />}
-      <StyledContent style={{ marginTop: '10px' }}>{article.content}</StyledContent>
-      <StyledBackTo onClick={handleBack}>
-        <Chevron position={'left'} fill={'#4183c4'} width={14}></Chevron>
-        <p>{'Back to the list'}</p>
-      </StyledBackTo >
-      <LoaderComp isBusy={isBusy} />
+      {article && <>
+        <HeaderComp style={{ marginLeft: 0 }} title={article.title || ''} />
+        {article.urlToImage && <StyledImage src={article.urlToImage || ''} />}
+        <StyledContent>{article.content || ''}</StyledContent>
+        <StyledBackTo onClick={handleBack}>
+          <Chevron position={'left'} fill={'#4183c4'} width={14}></Chevron>
+          <p>{'Back to the list'}</p>
+        </StyledBackTo >
+        <LoaderComp isBusy={isBusy} />
+      </>
+      }
     </StyledWrapper>
+
   )
 }
 export default ArticlePage

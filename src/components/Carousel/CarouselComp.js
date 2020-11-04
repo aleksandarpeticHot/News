@@ -72,7 +72,11 @@ const CarouselComp = (props) => {
       {slides.map((article, index) => {
         const url = composeUrl(index)
         return <div style={{ transform: `translateX(${carouselTranslateX}px)` }} key={index} className="slide">
-          <Card style={{ width: `${slideWidth}px`, margin: 0, marginBottom: '10px' }} articlePage={url} {...article} />
+          <Card
+            style={{ width: `${slideWidth}px`, margin: 0, marginBottom: '10px' }}
+            articlePage={url}
+            {...article}
+          />
         </div>
       })}
       {!disableSlider && <>

@@ -6,6 +6,7 @@ flex-direction: column;
 
 .accordion_title{
   font-weight: 600;
+  font-size: large;
   text-align: left;
   flex-grow: 1;
   }

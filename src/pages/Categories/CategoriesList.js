@@ -1,14 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { categories } from '../../Constants'
 import { CategoryWrapper, CategoryContent } from './style'
-import categorieApi from '../../services/common/categories'
+import { getAllCategories } from '../../services/common/categories'
 import notify from '../../services/common/notify'
-import entertainment from '../../mockups/entertainment.json'
-import general from '../../mockups/general.json'
-import health from '../../mockups/health.json'
-import science from '../../mockups/science.json'
-import sport from '../../mockups/sport.json'
-import technology from '../../mockups/technology.json'
 import { LanguageContext } from '../../LanguageContext'
 import Accordion from '../../components/Accordion/Accordion'
 import HeaderComp from '../../components/Header/HeaderComp'
@@ -38,24 +32,16 @@ const CategoriesList = () => {
   const fetchArticlesInCategorie = async () => {
     setArticlesData(prevData => ({ ...prevData, isBusy: true }))
     try {
-      /*  const responseEntertainment = await categorieApi.getEntertainment(language.id, pageSize)
-       const responseGeneral = await categorieApi.getGeneral(language.id, pageSize)
-       const responseHealth = await categorieApi.getHealth(language.id, pageSize)
-       const responseScience = await categorieApi.getScience(language.id, pageSize)
-       const responseSport = await categorieApi.getSport(language.id, pageSize)
-       const responseTechnology = await categorieApi.getTechnology(language.id, pageSize)
-  */
+      const articles = {}
+      const response = await getAllCategories(language.id, pageSize)
+
+      categories.map((categorie, index) => {
+        articles[categorie.id] = response[index].data.articles
+      })
+
       setArticlesData({
         ...articlesData,
-        articles: {
-          entertainment: entertainment.articles,
-          general: general.articles,
-          health: health.articles,
-          science: science.articles,
-          sport: sport.articles,
-          technology: technology.articles
-
-        },
+        articles,
         isBusy: false
       })
     } catch (error) {
