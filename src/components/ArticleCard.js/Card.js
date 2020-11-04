@@ -19,7 +19,7 @@ const Card = (props: CardProps) => {
   return (
     <CardStyled style={props.style}>
       <StyledParagraph header>{title}</StyledParagraph>
-      <img src={urlToImage || defaultUrlImage} />
+      <img alt={''} src={urlToImage || defaultUrlImage} />
       <StyledParagraph >{description}</StyledParagraph>
       <a href={props.articlePage || ''} style={{ display: 'flex' }}>
         <p style={{ margin: '5px 0px 5px 5px' }}>{'More'}</p>
