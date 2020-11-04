@@ -4,7 +4,15 @@ import Chevron from '../Chevron'
 
 export const defaultUrlImage = 'https://pdsohio.com/wp-content/uploads/2017/04/default-image.jpg'
 
-const Card = (props) => {
+type CardProps = {
+  title: string,
+  urlToImage: ?string,
+  description: string,
+  style?: ?Object,
+  articlePage: ?string
+}
+
+const Card = (props: CardProps) => {
 
   const { title, urlToImage, description } = props
 

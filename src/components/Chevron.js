@@ -1,7 +1,15 @@
 import React from "react";
 import { leftChevron, rightChevron } from '../Constants'
 
-function Chevron(props) {
+type ChevronProps = {
+  className?: string,
+  height?: string,
+  width: number,
+  fill?: string,
+  position: string,
+}
+
+function Chevron(props: ChevronProps) {
   return (
     <svg
       className={props.className}

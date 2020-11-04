@@ -7,8 +7,15 @@ import HeaderComp from '../../../components/Header/HeaderComp'
 import { StyledWrapper, StyledImage, StyledBackTo, StyledContent } from './style'
 import Chevron from '../../../components/Chevron'
 import LoaderComp from "../../../components/Loader/LoaderComp"
+import type { LanguageType } from '../../../types/languageType'
 
-const ArticlePage = (props) => {
+type ArticlePageProps = {
+  language: LanguageType,
+  setDisableButtons: boolean,
+  history: Object
+}
+
+const ArticlePage = (props: ArticlePageProps) => {
 
   const { language, setDisableButtons } = useContext(LanguageContext)
 

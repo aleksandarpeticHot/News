@@ -9,7 +9,6 @@ import HeaderComp from '../../components/Header/HeaderComp'
 import CarouselComp from '../../components/Carousel/CarouselComp'
 import LoaderComp from '../../components/Loader/LoaderComp'
 
-
 export const pageSize = 5
 
 const CategoriesList = () => {
@@ -35,7 +34,7 @@ const CategoriesList = () => {
       const articles = {}
       const response = await getAllCategories(language.id, pageSize)
 
-      categories.map((categorie, index) => {
+      categories.forEach((categorie, index) => {
         articles[categorie.id] = response[index].data.articles
       })
 

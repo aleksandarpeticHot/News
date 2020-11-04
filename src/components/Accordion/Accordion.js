@@ -2,7 +2,15 @@ import React from "react";
 import { AccordionWrapper, AccordionContent, AccordionStyled } from './style';
 import Chevron from '../Chevron'
 
-const Accordion = (props) => {
+type AccordionProps = {
+  index: number,
+  active: boolean,
+  handleClick: (index: number) => void,
+  categoryTitle: string,
+  children: *
+}
+
+const Accordion = (props: AccordionProps) => {
 
   const { index, active, handleClick, categoryTitle } = props
 

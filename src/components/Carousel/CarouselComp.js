@@ -8,7 +8,13 @@ import { DEFAULT_ARTICLE_CARD_WIDTH } from '../../Constants'
 export const articleMarginAnPadding = 52
 export const defaultCardWidth = DEFAULT_ARTICLE_CARD_WIDTH + articleMarginAnPadding
 
-const CarouselComp = (props) => {
+type CarouselCompProps = {
+  slides: Array<Object>,
+  articleGroup: string,
+  articleId: string
+}
+
+const CarouselComp = (props: CarouselCompProps) => {
 
   const carouselRef = useRef(null);
 

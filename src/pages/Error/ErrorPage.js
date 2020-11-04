@@ -1,7 +1,11 @@
 import React from 'react'
 import { ErrorWrapper, StyledDivError } from './style'
 
-const ErrorPage = (props) => {
+type ErrorPageProps = {
+  history: Object
+}
+
+const ErrorPage = (props: ErrorPageProps) => {
 
   const handleGoBack = () => {
     props.history.goBack()
@@ -13,7 +17,7 @@ const ErrorPage = (props) => {
         {'Error'}
         <StyledDivError>{'an error happend'}</StyledDivError>
       </h1>
-      <a onClick={handleGoBack}>{'Go back'}</a>
+      <div onClick={handleGoBack}>{'Go back'}</div>
     </ErrorWrapper>
   )
 

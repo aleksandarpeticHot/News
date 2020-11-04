@@ -7,8 +7,13 @@ import { StyledInput, StyledSegment } from './style'
 import HeaderComp from '../../components/Header/HeaderComp'
 import { LanguageContext } from "../../LanguageContext";
 import LoaderComp from '../../components/Loader/LoaderComp'
+import type { LanguageType } from '../../types/languageType'
 
-const SearchComponent = (props) => {
+type SearchComponentProps = {
+  language: LanguageType
+}
+
+const SearchComponent = (props: SearchComponentProps) => {
 
 
   const inputRef = useRef(null)

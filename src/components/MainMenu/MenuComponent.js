@@ -1,11 +1,21 @@
 import React from 'react'
 import { leftSideMenu, rightSideMenu } from '../../Constants'
 import { StyledMenu, LanguageButton } from './style'
+import type { LanguageType } from '../../types/languageType'
 
-const MenuComponent = (props) => {
+
+type MenuComponentProps = {
+  onLanguageChange: (language: Object) => void,
+  language: LanguageType,
+  disableButtons: boolean
+}
+
+const MenuComponent = (props: MenuComponentProps) => {
+
+  const { onLanguageChange, language, disableButtons } = props
 
   const handleChangeLanguage = (language) => {
-    props.onLanguageChange(language)
+    onLanguageChange(language)
   }
 
   return <StyledMenu>
@@ -26,8 +36,8 @@ const MenuComponent = (props) => {
         {rightSideMenu.map(item => {
           return <li key={item.name} style={{ float: 'right' }}>
             <LanguageButton
-              active={props.language.id === item.id && !props.disableButtons}
-              disabled={props.disableButtons}
+              active={language.id === item.id && !disableButtons}
+              disabled={disableButtons}
               onClick={() => handleChangeLanguage(item)}
             >
               {item.name}

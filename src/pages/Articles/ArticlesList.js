@@ -7,9 +7,17 @@ import Card from '../../components/ArticleCard.js/Card'
 import HeaderComp from '../../components/Header/HeaderComp'
 import LoaderComp from '../../components/Loader/LoaderComp'
 import { StyledArticleGroup } from './style'
+import type { LanguageType } from '../../types/languageType'
 
+type ArticlesListProps = {
+  language: LanguageType,
+  articles?: Array<Object>,
+  urlData?: Object,
+  hideTitle?: boolean,
+  style?: Object
+}
 
-const ArticlesList = (props) => {
+const ArticlesList = (props: ArticlesListProps) => {
 
   const { language } = useContext(LanguageContext)
 
