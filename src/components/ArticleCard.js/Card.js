@@ -1,6 +1,7 @@
 import React from 'react'
 import { CardStyled, StyledParagraph } from './style'
 import Chevron from '../Chevron'
+import { Link } from 'react-router-dom'
 
 export const defaultUrlImage = 'https://pdsohio.com/wp-content/uploads/2017/04/default-image.jpg'
 
@@ -24,8 +25,8 @@ const Card = (props: CardProps) => {
         src={urlToImage || defaultUrlImage}
       />
       <StyledParagraph>{description}</StyledParagraph>
-      <a
-        href={props.articlePage || ''}
+      <Link
+        to={props.articlePage || ''}
         style={{ display: 'flex' }}
       >
         <p style={{ margin: '5px 0px 5px 5px' }}>
@@ -35,7 +36,7 @@ const Card = (props: CardProps) => {
           position={'right'}
           fill={'#4183c4'}
           width={10} />
-      </a>
+      </Link>
     </CardStyled>
   );
 }

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const StyledWrapper = styled.div`
@@ -12,7 +13,7 @@ margin: 20px auto;
 export const StyledContent = styled.p`
 margin-top: 10px;
 `
-export const StyledBackTo = styled.a`
+export const StyledBackTo = styled(Link)`
 display: flex;
 cursor: pointer;
 `

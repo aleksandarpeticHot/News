@@ -1,17 +1,10 @@
 import React, { useContext } from 'react'
 import { leftSideMenu, rightSideMenu } from '../../Constants'
 import { StyledMenu, LanguageButton } from './style'
-import type { LanguageType } from '../../types/languageType'
 import { LanguageContext } from '../../LanguageContext'
+import { Link } from 'react-router-dom'
 
-
-type MenuComponentProps = {
-  language: LanguageType,
-  disableButtons: boolean,
-  setLanguage: (language: Object) => void
-}
-
-const MenuComponent = (props: MenuComponentProps) => {
+const MenuComponent = () => {
 
   const { language, setLanguage, disableButtons } = useContext(LanguageContext)
 
@@ -25,12 +18,12 @@ const MenuComponent = (props: MenuComponentProps) => {
         <div>
           {leftSideMenu.map(item => {
             return <li key={item.name}>
-              <a
+              <Link
                 className={window.location.pathname === item.url ? 'active' : ''}
-                href={item.url}
+                to={item.url}
               >
                 {item.name}
-              </a>
+              </Link>
             </li>
           })}
         </div>

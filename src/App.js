@@ -1,7 +1,6 @@
-import React, { Suspense, useEffect, useState } from 'react'
+import React, { Suspense, useState } from 'react'
 import Router from './Router'
 import { LanguageContext } from './LanguageContext'
-import MainMenu from './components/MainMenu/MenuComponent'
 import { rightSideMenu } from './Constants'
 
 function App() {
@@ -12,7 +11,6 @@ function App() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <LanguageContext.Provider value={{ language, disableButtons, setDisableButtons, setLanguage }}>
-        <MainMenu />
         <Router />
       </LanguageContext.Provider>
     </Suspense>

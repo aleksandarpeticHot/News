@@ -7,12 +7,13 @@ import SearchComponent from '../src/pages/Search/SearchComponent'
 import { RouteTypes } from './Constants'
 import Notifications from 'react-notify-toast'
 import ErrorPage from './pages/Error/ErrorPage'
+import MainMenu from './components/MainMenu/MenuComponent'
 
 const Router = () => {
-  console.log('aaaaaaaa')
   return (
     <BrowserRouter>
       <Notifications options={{ timeout: 5000, zIndex: 20 }} />
+      <MainMenu />
       <Switch>
         {/* Home Page */}
         <Route exact path={'/'} component={ArticlesList} />
