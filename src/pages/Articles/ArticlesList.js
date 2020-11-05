@@ -6,6 +6,7 @@ import type { LanguageType } from '../../types/languageType'
 import Card from '../../components/ArticleCard.js/Card'
 import HeaderComp from '../../components/Header/HeaderComp'
 import LoaderComp from '../../components/Loader/LoaderComp'
+import Layout from '../Layout'
 
 /* Styles */
 import { StyledArticleGroup } from './style'
@@ -15,13 +16,13 @@ import newsApi from '../../services/common/news'
 import notify from '../../services/common/notify'
 
 /* Constants */
-import { RouteTypes, LabelsToTranslate } from '../../Constants'
+import { RouteTypes, LabelsToTranslate, ArticleGroups } from '../../Constants'
 
 type ArticlesListProps = {
   language: LanguageType,
   articles?: Array<Object>,
   urlData?: Object,
-  hideTitle?: boolean,
+  removeMainMenuAndHeader?: boolean,
   style?: Object
 }
 
@@ -71,7 +72,7 @@ const ArticlesList = (props: ArticlesListProps) => {
     return (
       <StyledArticleGroup style={props.style}>
         {articles.map((article, index) => {
-          const urlData = props.urlData || { articleGroup: 'country', articleId: 'gb', index: index }
+          const urlData = props.urlData || { articleGroup: ArticleGroups.country, articleId: 'gb', index: index }
           const url = composeUrl(urlData, index)
           return (
             <Card
@@ -85,14 +86,14 @@ const ArticlesList = (props: ArticlesListProps) => {
   }
 
   return (
-    <div>
-      {!props.hideTitle && <HeaderComp
+    <Layout removeMainMenuAndHeader={props.removeMainMenuAndHeader}>
+      <LoaderComp isBusy={isBusy} />
+      {!props.removeMainMenuAndHeader && <HeaderComp
         style={{ display: 'flex', justifyContent: 'center' }}
         title={`${LabelsToTranslate.TOP_NEWS_HEADER} ${language.country}:`}
       />}
-      <LoaderComp isBusy={isBusy} />
       {articles.length > 0 && renderArticles()}
-    </div>
+    </Layout>
   )
 }
 export default ArticlesList

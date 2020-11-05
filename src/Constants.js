@@ -6,7 +6,7 @@ export const RouteTypes = Object.assign({
   ARTICLE: '/article/:articleGroup/:articleId/:index'
 })
 
-export const apiKey = 'b20fd54dfbc94176a3acf4969eb7520e'
+export const apiKey = '84af36b62a74464587386a8b9fdcea59'
 
 export const leftSideMenu = [
   { name: 'Top News', url: RouteTypes.TOP_NEWS },
@@ -84,4 +84,10 @@ export const LabelsToTranslate = {
   GO_BACK: 'Go back',
   ERROR: 'Error',
   ERROR_DESCRIPTION: 'An error happend'
+}
+
+export const ArticleGroups = {
+  country: 'country',
+  category: 'category',
+  search: 'q'
 }

@@ -6,6 +6,7 @@ import Accordion from '../../components/Accordion/Accordion'
 import HeaderComp from '../../components/Header/HeaderComp'
 import CarouselComp from '../../components/Carousel/CarouselComp'
 import LoaderComp from '../../components/Loader/LoaderComp'
+import Layout from '../Layout'
 
 /* Styles */
 import { CategoryWrapper, CategoryContent } from './style'
@@ -15,7 +16,7 @@ import { getAllCategories } from '../../services/common/categories'
 import notify from '../../services/common/notify'
 
 /* Constants */
-import { categories, LabelsToTranslate } from '../../Constants'
+import { categories, LabelsToTranslate, ArticleGroups } from '../../Constants'
 
 export const pageSize = 5
 
@@ -42,16 +43,16 @@ const CategoriesList = () => {
       const articles = {}
       const response = await getAllCategories(language.id, pageSize)
 
-      categories.forEach((categorie, index) => {
-        articles[categorie.id] = response[index].data.articles
+      categories.forEach((category, index) => {
+        articles[category.id] = response[index].data.articles
       })
 
       setArticlesData({
         ...articlesData,
         articles,
-        isBusy: false,
-        activeIndex: -1
+        isBusy: false
       })
+
     } catch (error) {
       if (error.response) {
         notify(error.response.data.message, 'error')
@@ -73,7 +74,7 @@ const CategoriesList = () => {
       <div>
         {categories.map((category, index) => {
           const urlData = {
-            articleGroup: 'category',
+            articleGroup: ArticleGroups.category,
             articleId: category.id
           }
           return (
@@ -96,13 +97,15 @@ const CategoriesList = () => {
   }
 
   return (
-    <CategoryWrapper>
-      <CategoryContent>
-        <HeaderComp title={`${LabelsToTranslate.CATEGORIE_HEADER} ${language.country}:`} />
-        <LoaderComp isBusy={isBusy} />
-        {Object.keys(articles).length > 0 && renderCategories()}
-      </CategoryContent>
-    </CategoryWrapper>
+    <Layout>
+      <LoaderComp isBusy={isBusy} />
+      <CategoryWrapper>
+        <CategoryContent>
+          <HeaderComp title={`${LabelsToTranslate.CATEGORIE_HEADER} ${language.country}:`} />
+          {Object.keys(articles).length > 0 && renderCategories()}
+        </CategoryContent>
+      </CategoryWrapper>
+    </Layout>
   )
 
 }

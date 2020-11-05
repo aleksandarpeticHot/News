@@ -7,13 +7,26 @@ import SearchComponent from '../src/pages/Search/SearchComponent'
 import { RouteTypes } from './Constants'
 import Notifications from 'react-notify-toast'
 import ErrorPage from './pages/Error/ErrorPage'
-import MainMenu from './components/MainMenu/MenuComponent'
 
 const Router = () => {
+
+  //implement at later stages
+  /*   const PrivateRoute = ({ component: Component, ...rest }) => {
+      return (
+        <Route
+          {...rest}
+          render={(props) => window.location.pathname !== '/'
+            ? <Component {...props} />
+            : <Redirect to={{
+              pathname: RouteTypes.TOP_NEWS
+            }} />}
+        />
+      )
+    } */
+
   return (
     <BrowserRouter>
       <Notifications options={{ timeout: 5000, zIndex: 20 }} />
-      <MainMenu />
       <Switch>
         {/* Home Page */}
         <Route exact path={'/'} component={ArticlesList} />

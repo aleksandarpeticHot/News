@@ -16,7 +16,8 @@ import notify from '../../services/common/notify'
 import { getSearchResults } from '../../services/common/search'
 
 /* Constants */
-import { LabelsToTranslate } from '../../Constants'
+import { LabelsToTranslate, ArticleGroups } from '../../Constants'
+import Layout from "../Layout"
 
 
 type SearchComponentProps = {
@@ -83,27 +84,29 @@ const SearchComponent = (props: SearchComponentProps) => {
       (
         <ArticlesList
           {...props}
-          hideTitle={true}
+          removeMainMenuAndHeader={true}
           style={{ overflowY: 'auto', maxHeight: '75vh', margin: '10px' }}
-          urlData={{ articleGroup: 'q', articleId: searchValue }}
+          urlData={{ articleGroup: ArticleGroups.search, articleId: searchValue }}
           articles={results} />
       ) : null
   }
 
   return (
-    <StyledSegment>
-      <div className="wrapper">
-        <div style={{ textAlign: 'center' }}>
-          <HeaderComp style={{ marginTop: '50px' }} title={`Search top news from ${language.country} by term:`} />
-          <StyledInput
-            onChange={e => handleSearch(e.currentTarget.value)}
-            ref={inputRef}
-            placeholder={LabelsToTranslate.SEARCH_TERM} />
+    <Layout>
+      <StyledSegment>
+        <div className="wrapper">
+          <div style={{ textAlign: 'center' }}>
+            <HeaderComp style={{ marginTop: '50px' }} title={`Search top news from ${language.country} by term:`} />
+            <StyledInput
+              onChange={e => handleSearch(e.currentTarget.value)}
+              ref={inputRef}
+              placeholder={LabelsToTranslate.SEARCH_TERM} />
+          </div>
         </div>
-      </div>
-      <LoaderComp isBusy={isBusy} />
-      {searchValue !== '' && results.length === 0 ? <p className="noResultsMessage">{LabelsToTranslate.NO_RESULTS_MESSAGE}</p> : renderArticles()}
-    </StyledSegment>
+        <LoaderComp isBusy={isBusy} />
+        {searchValue !== '' && results.length === 0 ? <p className="noResultsMessage">{LabelsToTranslate.NO_RESULTS_MESSAGE}</p> : renderArticles()}
+      </StyledSegment>
+    </Layout>
   )
 }
 export default SearchComponent

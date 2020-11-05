@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyledLoader } from './style'
+import { StyledLoader, StyledWrapper } from './style'
 
 type LoaderCompProps = {
   isBusy: boolean
@@ -7,6 +7,10 @@ type LoaderCompProps = {
 
 const LoaderComp = (props: LoaderCompProps) => {
 
-  return <StyledLoader style={{ display: props.isBusy ? 'block' : 'none' }} />
+  return (
+    <StyledWrapper style={{ display: props.isBusy ? 'block' : 'none' }}>
+      <StyledLoader />
+    </StyledWrapper>
+  )
 }
 export default LoaderComp

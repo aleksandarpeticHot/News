@@ -7,7 +7,7 @@ type AccordionProps = {
   active: boolean,
   handleClick: (index: number) => void,
   categoryTitle: string,
-  children: *
+  children: any
 }
 
 const Accordion = (props: AccordionProps) => {

@@ -27,7 +27,7 @@ const Card = (props: CardProps) => {
       <StyledParagraph>{description}</StyledParagraph>
       <Link
         to={props.articlePage || ''}
-        style={{ display: 'flex' }}
+        style={{ display: 'flex', alignItems: 'baseline' }}
       >
         <p style={{ margin: '5px 0px 5px 5px' }}>
           {'More'}

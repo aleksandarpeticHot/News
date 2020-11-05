@@ -7,6 +7,7 @@ import type { LanguageType } from '../../types/languageType'
 import HeaderComp from '../../components/Header/HeaderComp'
 import Chevron from '../../components/Chevron'
 import LoaderComp from "../../components/Loader/LoaderComp"
+import Layout from '../Layout'
 
 /* Styles */
 import { StyledWrapper, StyledImage, StyledBackTo, StyledContent } from './style'
@@ -16,7 +17,7 @@ import articleApi from '../../services/common/news'
 import notify from '../../services/common/notify'
 
 /* Constants */
-import { LabelsToTranslate } from '../../Constants'
+import { LabelsToTranslate, ArticleGroups } from '../../Constants'
 
 type ArticlePageProps = {
   language: LanguageType,
@@ -46,7 +47,7 @@ const ArticlePage = (props: ArticlePageProps) => {
     setData(prevData => ({ ...prevData, isBusy: true }))
     try {
       let responseArticles = {}
-      if (articleGroup === 'country') {
+      if (articleGroup === ArticleGroups.country) {
         responseArticles = await articleApi.getTopNews(language.id)
       }
       else {
@@ -73,19 +74,21 @@ const ArticlePage = (props: ArticlePageProps) => {
   }
 
   return (
-    <StyledWrapper>
-      {article && <>
-        <HeaderComp style={{ marginLeft: 0 }} title={article.title || ''} />
-        {article.urlToImage && <StyledImage src={article.urlToImage || ''} />}
-        <StyledContent>{article.content || ''}</StyledContent>
-        <StyledBackTo onClick={handleBack}>
-          <Chevron position={'left'} fill={'#4183c4'} width={14}></Chevron>
-          <p>{LabelsToTranslate.BACK_TO_LIST}</p>
-        </StyledBackTo >
-        <LoaderComp isBusy={isBusy} />
-      </>
-      }
-    </StyledWrapper>
+    <Layout>
+      <LoaderComp isBusy={isBusy} />
+      <StyledWrapper>
+        {article && <>
+          <HeaderComp style={{ marginLeft: 0 }} title={article.title || ''} />
+          {article.urlToImage && <StyledImage src={article.urlToImage || ''} />}
+          <StyledContent>{article.content || ''}</StyledContent>
+          <StyledBackTo onClick={handleBack}>
+            <Chevron position={'left'} fill={'#4183c4'} width={14}></Chevron>
+            <p>{LabelsToTranslate.BACK_TO_LIST}</p>
+          </StyledBackTo >
+        </>
+        }
+      </StyledWrapper>
+    </Layout>
 
   )
 }
