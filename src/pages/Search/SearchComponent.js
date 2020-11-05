@@ -5,8 +5,8 @@ import { LanguageContext } from "../../LanguageContext"
 
 /* Components */
 import HeaderComp from '../../components/Header/HeaderComp'
-import ArticlesList from '../Articles/ArticlesList'
 import LoaderComp from '../../components/Loader/LoaderComp'
+import SearcList from './SearchList'
 
 /* Styles */
 import { StyledInput, StyledSegment } from './style'
@@ -47,7 +47,7 @@ const SearchComponent = (props: SearchComponentProps) => {
       isBusy: false
     })
     inputRef.current.value = ''
-  }, [props])
+  }, [language])
 
   const handleSearch = debounce(async (text) => {
     try {
@@ -82,10 +82,7 @@ const SearchComponent = (props: SearchComponentProps) => {
   const renderArticles = () => {
     return results.length > 0 ?
       (
-        <ArticlesList
-          {...props}
-          removeMainMenuAndHeader={true}
-          style={{ overflowY: 'auto', maxHeight: '75vh', margin: '10px' }}
+        <SearcList
           urlData={{ articleGroup: ArticleGroups.search, articleId: searchValue }}
           articles={results} />
       ) : null

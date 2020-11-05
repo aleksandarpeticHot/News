@@ -22,3 +22,11 @@ height: calc(100vh - 47px);
   text-align: center;
 }
 `
+export const StyledArticleGroup = styled.div`
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+overflow-y: auto; 
+max-height: 75vh; 
+margin: 10px;
+`

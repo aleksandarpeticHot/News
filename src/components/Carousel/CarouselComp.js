@@ -60,7 +60,7 @@ const CarouselComp = (props: CarouselCompProps) => {
     return () => {
       window.removeEventListener('resize', handleResize)
     }
-  }, [props])
+  }, [props.slides])
 
   const composeUrl = (index) => {
     const { articleGroup, articleId } = props
