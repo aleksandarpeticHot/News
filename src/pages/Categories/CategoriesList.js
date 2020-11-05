@@ -26,12 +26,11 @@ const CategoriesList = () => {
 
   const [articlesData, setArticlesData] = useState({
     isBusy: false,
-    articles: {}
+    articles: {},
+    activeIndex: -1
   })
 
-  const [activeIndex, setActiveIndex] = useState(-1)
-
-  const { articles, isBusy } = articlesData
+  const { articles, isBusy, activeIndex } = articlesData
 
   useEffect(() => {
     fetchArticlesInCategorie()
@@ -50,7 +49,8 @@ const CategoriesList = () => {
       setArticlesData({
         ...articlesData,
         articles,
-        isBusy: false
+        isBusy: false,
+        activeIndex: -1
       })
 
     } catch (error) {
@@ -66,7 +66,7 @@ const CategoriesList = () => {
 
   const handleClick = (index) => {
     const newIndex = activeIndex === index ? -1 : index
-    setActiveIndex(newIndex)
+    setArticlesData({ ...articlesData, activeIndex: newIndex })
   }
 
   const renderCategories = () => {
