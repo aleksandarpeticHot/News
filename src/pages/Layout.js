@@ -2,14 +2,13 @@ import React from 'react'
 import MainMenu from '../components/MainMenu/MenuComponent'
 
 type LayoutProps = {
-  children: any,
-  removeMainMenuAndHeader?: boolean
+  children: any
 }
 
 const Layout = (props: LayoutProps) => {
   return (
     <>
-      {!props.removeMainMenuAndHeader && <MainMenu />}
+      <MainMenu />
       {props.children}
     </>
   )

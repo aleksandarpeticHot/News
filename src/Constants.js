@@ -6,7 +6,7 @@ export const RouteTypes = Object.assign({
   ARTICLE: '/article/:articleGroup/:articleId/:index'
 })
 
-export const apiKey = '4b293389de0d4aa9b630a372fd2d49bd'
+export const apiKey = '82712a654eff4dffb21764cfdc7653cb'
 
 export const leftSideMenu = [
   { name: 'Top News', url: RouteTypes.TOP_NEWS },
