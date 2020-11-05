@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route, BrowserRouter } from 'react-router-dom'
 import ArticlesList from '../src/pages/Articles/ArticlesList'
-import Article from './pages/Articles/Article/ArticlePage'
+import Article from './pages/Article/ArticlePage'
 import CategoriesList from '../src/pages/Categories/CategoriesList'
 import SearchComponent from '../src/pages/Search/SearchComponent'
 import { RouteTypes } from './Constants'

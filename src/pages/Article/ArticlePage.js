@@ -1,22 +1,22 @@
 import React, { useState, useEffect, useContext } from "react"
 import { useParams } from 'react-router-dom'
-import { LanguageContext } from "../../../LanguageContext"
-import type { LanguageType } from '../../../types/languageType'
+import { LanguageContext } from "../../LanguageContext"
+import type { LanguageType } from '../../types/languageType'
 
 /* Components */
-import HeaderComp from '../../../components/Header/HeaderComp'
-import Chevron from '../../../components/Chevron'
-import LoaderComp from "../../../components/Loader/LoaderComp"
+import HeaderComp from '../../components/Header/HeaderComp'
+import Chevron from '../../components/Chevron'
+import LoaderComp from "../../components/Loader/LoaderComp"
 
 /* Styles */
 import { StyledWrapper, StyledImage, StyledBackTo, StyledContent } from './style'
 
 /* Services */
-import articleApi from '../../../services/common/news'
-import notify from '../../../services/common/notify'
+import articleApi from '../../services/common/news'
+import notify from '../../services/common/notify'
 
 /* Constants */
-import { LabelsToTranslate } from '../../../Constants'
+import { LabelsToTranslate } from '../../Constants'
 
 type ArticlePageProps = {
   language: LanguageType,

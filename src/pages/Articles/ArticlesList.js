@@ -58,7 +58,7 @@ const ArticlesList = (props: ArticlesListProps) => {
       else {
         notify('General error.', 'error')
       }
-      setNewsData(prevData => ({ ...prevData, isBusy: true }))
+      setNewsData(prevData => ({ ...prevData, isBusy: false }))
     }
   }
 
