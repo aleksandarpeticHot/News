@@ -1,9 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { RouteTypes } from '../../Constants'
+
+/* Components */
 import Card from '../ArticleCard.js/Card'
-import { StyledCarousel } from './style'
 import Chevron from '../Chevron'
-import { DEFAULT_ARTICLE_CARD_WIDTH } from '../../Constants'
+
+/* Styles */
+import { StyledCarousel } from './style'
+
+/* Constants */
+import { RouteTypes, DEFAULT_ARTICLE_CARD_WIDTH } from '../../Constants'
+
 
 export const articleMarginAnPadding = 52
 export const defaultCardWidth = DEFAULT_ARTICLE_CARD_WIDTH + articleMarginAnPadding
@@ -61,13 +67,13 @@ const CarouselComp = (props: CarouselCompProps) => {
     return RouteTypes.ARTICLE.replace(':articleGroup', articleGroup).replace(':articleId', articleId).replace(':index', index)
   }
 
-  const goLeft = () => {
+  const slideToLeft = () => {
     const widthSlide = slideWidth + articleMarginAnPadding
     const availableSpace = widthSlide * (slides.length - slideFit)
     Math.round(carouselTranslateX) === 0 ? setCarouselTranslateX(-availableSpace) : setCarouselTranslateX(carouselTranslateX + widthSlide)
   }
 
-  const goRight = () => {
+  const slideToRight = () => {
     const widthSlide = slideWidth + articleMarginAnPadding
     const availableSpace = widthSlide * (slides.length - slideFit)
     carouselTranslateX === -Math.round(availableSpace) ? setCarouselTranslateX(0) : setCarouselTranslateX(carouselTranslateX - widthSlide)
@@ -86,10 +92,10 @@ const CarouselComp = (props: CarouselCompProps) => {
         </div>
       })}
       {!disableSlider && <>
-        <p onClick={goLeft} className="goLeft">
+        <p onClick={slideToLeft} className="leftChevron">
           <Chevron position={'left'} width={30} />
         </p>
-        <p onClick={goRight} className="goRight">
+        <p onClick={slideToRight} className="rightChevron">
           <Chevron position={'right'} width={30}></Chevron>
         </p>
       </>

@@ -1,13 +1,22 @@
 import React, { useState, useEffect, useContext } from "react"
 import { useParams } from 'react-router-dom'
-import articleApi from '../../../services/common/news'
-import notify from '../../../services/common/notify'
 import { LanguageContext } from "../../../LanguageContext"
+import type { LanguageType } from '../../../types/languageType'
+
+/* Components */
 import HeaderComp from '../../../components/Header/HeaderComp'
-import { StyledWrapper, StyledImage, StyledBackTo, StyledContent } from './style'
 import Chevron from '../../../components/Chevron'
 import LoaderComp from "../../../components/Loader/LoaderComp"
-import type { LanguageType } from '../../../types/languageType'
+
+/* Styles */
+import { StyledWrapper, StyledImage, StyledBackTo, StyledContent } from './style'
+
+/* Services */
+import articleApi from '../../../services/common/news'
+import notify from '../../../services/common/notify'
+
+/* Constants */
+import { LabelsToTranslate } from '../../../Constants'
 
 type ArticlePageProps = {
   language: LanguageType,
@@ -40,7 +49,9 @@ const ArticlePage = (props: ArticlePageProps) => {
       if (articleGroup === 'country') {
         responseArticles = await articleApi.getTopNews(language.id)
       }
-      responseArticles = await articleApi.getArticle(language.id, articleGroup, articleId)
+      else {
+        responseArticles = await articleApi.getArticle(language.id, articleGroup, articleId)
+      }
       setData({
         ...data,
         isBusy: false,
@@ -69,7 +80,7 @@ const ArticlePage = (props: ArticlePageProps) => {
         <StyledContent>{article.content || ''}</StyledContent>
         <StyledBackTo onClick={handleBack}>
           <Chevron position={'left'} fill={'#4183c4'} width={14}></Chevron>
-          <p>{'Back to the list'}</p>
+          <p>{LabelsToTranslate.BACK_TO_LIST}</p>
         </StyledBackTo >
         <LoaderComp isBusy={isBusy} />
       </>

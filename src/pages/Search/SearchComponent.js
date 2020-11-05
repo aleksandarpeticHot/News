@@ -1,13 +1,23 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { getSearchResults } from '../../services/common/search'
-import ArticlesList from '../Articles/ArticlesList'
+import React, { useContext, useEffect, useRef, useState } from "react"
 import { debounce } from 'lodash'
-import notify from '../../services/common/notify'
-import { StyledInput, StyledSegment } from './style'
-import HeaderComp from '../../components/Header/HeaderComp'
-import { LanguageContext } from "../../LanguageContext";
-import LoaderComp from '../../components/Loader/LoaderComp'
 import type { LanguageType } from '../../types/languageType'
+import { LanguageContext } from "../../LanguageContext"
+
+/* Components */
+import HeaderComp from '../../components/Header/HeaderComp'
+import ArticlesList from '../Articles/ArticlesList'
+import LoaderComp from '../../components/Loader/LoaderComp'
+
+/* Styles */
+import { StyledInput, StyledSegment } from './style'
+
+/* Services */
+import notify from '../../services/common/notify'
+import { getSearchResults } from '../../services/common/search'
+
+/* Constants */
+import { LabelsToTranslate } from '../../Constants'
+
 
 type SearchComponentProps = {
   language: LanguageType
@@ -88,11 +98,11 @@ const SearchComponent = (props: SearchComponentProps) => {
           <StyledInput
             onChange={e => handleSearch(e.currentTarget.value)}
             ref={inputRef}
-            placeholder={'Search term...'} />
+            placeholder={LabelsToTranslate.SEARCH_TERM} />
         </div>
       </div>
       <LoaderComp isBusy={isBusy} />
-      {searchValue !== '' && results.length === 0 ? <p className="noResultsMessage">{'There are no results to display...'}</p> : renderArticles()}
+      {searchValue !== '' && results.length === 0 ? <p className="noResultsMessage">{LabelsToTranslate.NO_RESULTS_MESSAGE}</p> : renderArticles()}
     </StyledSegment>
   )
 }

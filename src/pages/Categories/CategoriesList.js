@@ -1,13 +1,21 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { categories } from '../../Constants'
-import { CategoryWrapper, CategoryContent } from './style'
-import { getAllCategories } from '../../services/common/categories'
-import notify from '../../services/common/notify'
 import { LanguageContext } from '../../LanguageContext'
+
+/* Components */
 import Accordion from '../../components/Accordion/Accordion'
 import HeaderComp from '../../components/Header/HeaderComp'
 import CarouselComp from '../../components/Carousel/CarouselComp'
 import LoaderComp from '../../components/Loader/LoaderComp'
+
+/* Styles */
+import { CategoryWrapper, CategoryContent } from './style'
+
+/* Services */
+import { getAllCategories } from '../../services/common/categories'
+import notify from '../../services/common/notify'
+
+/* Constants */
+import { categories, LabelsToTranslate } from '../../Constants'
 
 export const pageSize = 5
 
@@ -26,7 +34,7 @@ const CategoriesList = () => {
 
   useEffect(() => {
     fetchArticlesInCategorie()
-  }, [])
+  }, [language])
 
   const fetchArticlesInCategorie = async () => {
     setArticlesData(prevData => ({ ...prevData, isBusy: true }))
@@ -41,7 +49,8 @@ const CategoriesList = () => {
       setArticlesData({
         ...articlesData,
         articles,
-        isBusy: false
+        isBusy: false,
+        activeIndex: -1
       })
     } catch (error) {
       if (error.response) {
@@ -89,7 +98,7 @@ const CategoriesList = () => {
   return (
     <CategoryWrapper>
       <CategoryContent>
-        <HeaderComp title={`Top 5 news by categories from the ${language.country}:`} />
+        <HeaderComp title={`${LabelsToTranslate.CATEGORIE_HEADER} ${language.country}:`} />
         <LoaderComp isBusy={isBusy} />
         {Object.keys(articles).length > 0 && renderCategories()}
       </CategoryContent>

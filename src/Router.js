@@ -9,7 +9,7 @@ import Notifications from 'react-notify-toast'
 import ErrorPage from './pages/Error/ErrorPage'
 
 const Router = () => {
-
+  console.log('aaaaaaaa')
   return (
     <BrowserRouter>
       <Notifications options={{ timeout: 5000, zIndex: 20 }} />

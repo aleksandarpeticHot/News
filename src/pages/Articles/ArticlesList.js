@@ -1,13 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react'
-import newsApi from '../../services/common/news'
-import { RouteTypes } from '../../Constants'
-import notify from '../../services/common/notify'
 import { LanguageContext } from '../../LanguageContext'
+import type { LanguageType } from '../../types/languageType'
+
+/* Components */
 import Card from '../../components/ArticleCard.js/Card'
 import HeaderComp from '../../components/Header/HeaderComp'
 import LoaderComp from '../../components/Loader/LoaderComp'
+
+/* Styles */
 import { StyledArticleGroup } from './style'
-import type { LanguageType } from '../../types/languageType'
+
+/* Services */
+import newsApi from '../../services/common/news'
+import notify from '../../services/common/notify'
+
+/* Constants */
+import { RouteTypes, LabelsToTranslate } from '../../Constants'
 
 type ArticlesListProps = {
   language: LanguageType,
@@ -78,7 +86,10 @@ const ArticlesList = (props: ArticlesListProps) => {
 
   return (
     <div>
-      {!props.hideTitle && <HeaderComp style={{ display: 'flex', justifyContent: 'center' }} title={`Top news from the ${language.country}:`} />}
+      {!props.hideTitle && <HeaderComp
+        style={{ display: 'flex', justifyContent: 'center' }}
+        title={`${LabelsToTranslate.TOP_NEWS_HEADER} ${language.country}:`}
+      />}
       <LoaderComp isBusy={isBusy} />
       {articles.length > 0 && renderArticles()}
     </div>

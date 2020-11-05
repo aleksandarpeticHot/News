@@ -17,7 +17,7 @@ overflow: hidden;
   min-height: 100px;
 }
 
-.goLeft{
+.leftChevron{
   position: absolute;
   top: 45%;
   cursor: pointer;
@@ -30,7 +30,7 @@ overflow: hidden;
   text-align: center;
 }
 
-.goRight{
+.rightChevron{
   position: absolute;
   padding: inherit;
   cursor: pointer;

@@ -11,7 +11,7 @@ flex-direction: column;
   flex-grow: 1;
   }
 
-.accordion_icon{
+.accordion-icon{
   margin-left: auto;
   transition: transform 0.6s ease;
   }
@@ -46,4 +46,10 @@ overflow: auto;
 transition: max-height 0.3s ease;
 margin-bottom: ${props => props.active ? '10px' : 0};
 }
+`
+export const AccordionTitle = styled.p`
+font-weight: 600;
+font-size: large;
+text-align: left;
+flex-grow: 1;
 `

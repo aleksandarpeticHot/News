@@ -1,5 +1,5 @@
 import React from "react";
-import { AccordionWrapper, AccordionContent, AccordionStyled } from './style';
+import { AccordionWrapper, AccordionContent, AccordionStyled, AccordionTitle } from './style';
 import Chevron from '../Chevron'
 
 type AccordionProps = {
@@ -22,8 +22,8 @@ const Accordion = (props: AccordionProps) => {
   return (
     <AccordionWrapper>
       <AccordionStyled active={active} onClick={handleClickAccordion}>
-        <p className="accordion_title">{categoryTitle}</p>
-        <Chevron className={`accordion_icon ${active ? 'rotate' : ''}`} width={25} fill={"#777"} />
+        <AccordionTitle>{categoryTitle}</AccordionTitle>
+        <Chevron className={`accordion-icon ${active ? 'rotate' : ''}`} width={25} fill={"#777"} />
       </AccordionStyled>
       <AccordionContent
         active={active}

@@ -1,5 +1,6 @@
 import React from 'react'
 import { ErrorWrapper, StyledDivError } from './style'
+import { LabelsToTranslate } from '../../Constants'
 
 type ErrorPageProps = {
   history: Object
@@ -14,10 +15,10 @@ const ErrorPage = (props: ErrorPageProps) => {
   return (
     <ErrorWrapper>
       <h1>
-        {'Error'}
-        <StyledDivError>{'an error happend'}</StyledDivError>
+        {LabelsToTranslate.ERROR}
+        <StyledDivError>{LabelsToTranslate.ERROR_DESCRIPTION}</StyledDivError>
       </h1>
-      <div onClick={handleGoBack}>{'Go back'}</div>
+      <div onClick={handleGoBack}>{LabelsToTranslate.GO_BACK}</div>
     </ErrorWrapper>
   )
 

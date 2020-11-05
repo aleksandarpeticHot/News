@@ -19,11 +19,22 @@ const Card = (props: CardProps) => {
   return (
     <CardStyled style={props.style}>
       <StyledParagraph header>{title}</StyledParagraph>
-      <img alt={''} src={urlToImage || defaultUrlImage} />
-      <StyledParagraph >{description}</StyledParagraph>
-      <a href={props.articlePage || ''} style={{ display: 'flex' }}>
-        <p style={{ margin: '5px 0px 5px 5px' }}>{'More'}</p>
-        <Chevron position={'right'} fill={'#4183c4'} width={10}></Chevron>
+      <img
+        alt={''}
+        src={urlToImage || defaultUrlImage}
+      />
+      <StyledParagraph>{description}</StyledParagraph>
+      <a
+        href={props.articlePage || ''}
+        style={{ display: 'flex' }}
+      >
+        <p style={{ margin: '5px 0px 5px 5px' }}>
+          {'More'}
+        </p>
+        <Chevron
+          position={'right'}
+          fill={'#4183c4'}
+          width={10} />
       </a>
     </CardStyled>
   );

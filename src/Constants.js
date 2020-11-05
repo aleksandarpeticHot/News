@@ -8,7 +8,6 @@ export const RouteTypes = Object.assign({
 
 export const apiKey = 'b20fd54dfbc94176a3acf4969eb7520e'
 
-//should be defined is some config file coming from the api
 export const leftSideMenu = [
   { name: 'Top News', url: RouteTypes.TOP_NEWS },
   { name: 'Categories', url: RouteTypes.CATEGORIES },
@@ -80,5 +79,9 @@ export const LabelsToTranslate = {
   BACK_TO_LIST: 'Back to the list',
   TOP_NEWS_HEADER: 'Top news from',
   CATEGORIE_HEADER: 'Top 5 news by categories from',
-  NO_RESULTS_MESSAGE: 'There are no results to display...'
+  NO_RESULTS_MESSAGE: 'There are no results to display...',
+  SEARCH_TERM: 'Search term...',
+  GO_BACK: 'Go back',
+  ERROR: 'Error',
+  ERROR_DESCRIPTION: 'An error happend'
 }
