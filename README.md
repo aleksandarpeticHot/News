@@ -10,7 +10,7 @@ React
 
 
 ```bash
-git clone https://github.com/aleksandarpeticHot/News
+git clone https://github.com/aleksandarpeticHot/News.git
 ```
 
 Register on NewsApi to get the key, and save the key in apiKey variable that is stored in ~src/Constants file.
